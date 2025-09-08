@@ -1,0 +1,7 @@
+functions-framework==3.*
+flask
+google-cloud-logging
+google-cloud-aiplatform>=1.110.0
+anthropic[vertex]
+markdown
+selectolax
