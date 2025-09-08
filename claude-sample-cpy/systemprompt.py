@@ -1,6 +1,58 @@
 import time
 import re
 
+def detect_language(user_query, history):
+    """
+    Detect user's preferred language from query and history
+    """
+    # Spanish indicators
+    spanish_words = [
+        "hola", "gracias", "por favor", "disculpe", "buenos", "dias", "tardes", "noches",
+        "como", "esta", "donde", "cuando", "cuanto", "cuesta", "precio", "programa",
+        "curso", "escuela", "estudio", "quiero", "necesito", "informacion", "horario",
+        "estetica", "cosmetologia", "belleza", "maquillaje", "uñas", "cejas", "depilacion",
+        "si", "sí", "no", "nada", "perfecto", "bien", "excelente", "muchas", "español", "espanol"
+    ]
+    
+    # Check current query
+    query_lower = user_query.lower()
+    spanish_score = sum(1 for word in spanish_words if word in query_lower)
+    
+    # Check for Spanish accents and special characters
+    spanish_chars = ["ñ", "á", "é", "í", "ó", "ú", "ü"]
+    has_spanish_chars = any(char in query_lower for char in spanish_chars)
+    
+    # Check conversation history
+    history_text = " ".join([
+        msg.get("content", [{}])[0].get("text", "") 
+        for msg in history if msg.get("content")
+    ]).lower()
+    
+    history_spanish_score = sum(1 for word in spanish_words if word in history_text)
+    
+    # Language detection logic
+    if spanish_score > 0 or has_spanish_chars or history_spanish_score > 2:
+        return "spanish"
+    else:
+        return "english"
+
+        def check_location_confirmed(history):
+    """
+    Check if location has been confirmed in conversation history
+    """
+    conversation_text = " ".join([
+        msg.get("content", [{}])[0].get("text", "") 
+        for msg in history if msg.get("content")
+    ]).lower()
+    
+    # Look for location confirmations
+    location_indicators = [
+        "new york", "ny", "nj", "new jersey", "wayne", "broadway",
+        "1501 broadway", "201 willowbrook", "manhattan", "jersey"
+    ]
+    
+    return any(loc in conversation_text for loc in location_indicators)
+
 today = time.strftime("%Y-%m-%d")
 
 def detect_enrollment_completion_state(history, user_query):
@@ -93,7 +145,7 @@ def get_contextual_sophia_prompt(history=[], user_query=""):
         stage = "initial"
 
     # Base prompt
-    base_prompt = f"""You are Sophia, Christine Valmy's AI enrollment assistant. Today: {today}
+    base_prompt = f"""You are Sophia, Christine Valmy's AI enrollment assistant. I am here to help you learn more about the school and courses offered. I can respond in English or Spanish, which do you prefer?" 
 
 **CRITICAL CONTACT INFO STATE:**"""
     
