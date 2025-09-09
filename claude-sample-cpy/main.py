@@ -170,11 +170,13 @@ def smart_retrieve_from_rag(query_text: str, conversation_stage: str = "active")
         items = data.get("contexts", {}).get("contexts", [])
         snippets, sources = [], []
 
-        # Smart relevance filtering
+        # Smart relevance filtering with schedule priority
         relevance_keywords = [
-            query_text.lower(), 'esthetic', 'nail', 'wax', 'makeup', 
-            'program', 'course', 'schedule', 'price', 'tuition', 'admission',
-            'start date', 'enrollment', 'financial aid'
+            query_text.lower(), 'esthetic', 'nail', 'wax', 'makeup', 'barbering',
+            'program', 'course', 'schedule', 'start date', 'start dates', 'when',
+            'price', 'tuition', 'admission', 'enrollment', 'financial aid',
+            '2025', 'january', 'february', 'march', 'april', 'may', 'june',
+            'july', 'august', 'september', 'october', 'november', 'december'
         ]
 
         for c in items[:top_k]:
@@ -422,7 +424,7 @@ def app(request: Request):
         # Get optimized system prompt
         start_prompt = time.time()
         system_prompt = get_system_prompt_for_request(history, user_query)
-        system_prompt += f"\n\nIMPORTANT: Today's date is {datetime.now().strftime('%Y-%m-%d')}. Never mention or suggest any course start dates that are in the past. Only provide current and future program start dates."
+        system_prompt += f"\n\nCRITICAL DATE VALIDATION: Today's date is {datetime.now().strftime('%Y-%m-%d')}. MANDATORY REQUIREMENTS: 1) VERIFY every date from RAG context is after today before displaying, 2) Show EXACTLY TWO upcoming future start dates only, 3) Check conversation history to avoid repeating identical schedule information, 4) If RAG lacks future dates, request current information. NEVER guess or assume dates."
         latency_prompt = round(time.time() - start_prompt, 3)
         
         # Build optimized message history
