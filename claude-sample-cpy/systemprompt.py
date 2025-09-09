@@ -217,6 +217,13 @@ def detect_enrollment_ready(history, user_query):
     
     return enrollment_ready and program_interest
 
+def detect_enrollment_info_collected(history):
+    """
+    Detect if enrollment information has been collected
+    """
+    name, email, phone = extract_contact_info(history)
+    return bool(name and email and phone)
+
 def get_enrollment_collection_prompt(detected_language, name, email, phone, location_confirmed, history):
     """
     Get the enrollment collection prompt based on what information is missing
@@ -324,9 +331,6 @@ def get_contextual_sophia_prompt(history=[], user_query=""):
     location_confirmed = check_location_confirmed(history)
     pricing_inquiry = detect_pricing_inquiry(user_query)
     payment_inquiry = detect_payment_inquiry(user_query)
-    is_first = is_first_interaction(history)
-    contact_request = detect_contact_request(user_query)
-    information_gap = detect_information_gap(user_query, history)
 
     enrollment_ready = detect_enrollment_ready(history, user_query)
     enrollment_info_collected = detect_enrollment_info_collected(history)
@@ -344,6 +348,8 @@ def get_contextual_sophia_prompt(history=[], user_query=""):
         stage = "post_enrollment"
     elif has_contact_info:
         stage = "enrollment_ready"
+    elif enrollment_ready and not enrollment_info_collected:
+        stage = "enrollment_collection"
     elif pricing_inquiry:
         stage = "pricing"
     elif payment_inquiry:

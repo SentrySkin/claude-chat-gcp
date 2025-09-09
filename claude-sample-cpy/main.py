@@ -133,7 +133,7 @@ def smart_retrieve_from_rag(query_text: str, conversation_stage: str = "active")
         return [], []
     
     # Reduce RAG calls for post-enrollment stages
-    if conversation_stage == "post_enrollment":
+    if conversation_stage in ["post_enrollment", "enrollment_collection"]:
         top_k = 3
     else:
         top_k = RAG_TOP_K
@@ -294,7 +294,25 @@ def analyze_conversation_state(history, user_query):
         elif has_contact_info:
             return "enrollment_ready"
         else:
-            return "active"
+            # Check for other conversation stages
+            from systemprompt import detect_enrollment_ready, detect_enrollment_info_collected, detect_pricing_inquiry, detect_payment_inquiry
+            
+            # Check if user is asking about pricing
+            if detect_pricing_inquiry(user_query):
+                return "pricing"
+            
+            # Check if user is asking about payment options
+            if detect_payment_inquiry(user_query):
+                return "payment_options"
+            
+            # Check if user is ready for enrollment but missing contact info
+            enrollment_ready = detect_enrollment_ready(history, user_query)
+            enrollment_info_collected = detect_enrollment_info_collected(history)
+            
+            if enrollment_ready and not enrollment_info_collected:
+                return "enrollment_collection"
+            else:
+                return "active"
     except:
         return "active"  # Fallback to active state
 
@@ -312,6 +330,10 @@ def get_optimized_claude_params(conversation_stage, user_query_length):
         return {**base_params, "max_tokens": 100, "temperature": 0.1}
     elif conversation_stage == "post_enrollment":
         return {**base_params, "max_tokens": 200, "temperature": 0.2}
+    elif conversation_stage == "enrollment_collection":
+        return {**base_params, "max_tokens": 300, "temperature": 0.2}
+    elif conversation_stage in ["pricing", "payment_options"]:
+        return {**base_params, "max_tokens": 400, "temperature": 0.2}
     elif user_query_length < 20:  # Short queries
         return {**base_params, "max_tokens": 250}
     else:  # Longer, complex queries
