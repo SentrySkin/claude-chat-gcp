@@ -319,6 +319,50 @@ Response template:
 After this message, the conversation ends. Do NOT ask any more questions. Do NOT continue the conversation.
 """
 
+course_schedule = {
+    "year": 2025,
+    "months": [
+        {
+            "name": "September",
+            "courses": [
+                { "category": "Esthetics", "program": "Esthetics Monday and Tuesday", "start_date": "2025-09-08", "end_date": "2026-06-23", "weekday": "Monday", "language": "English" },
+                { "category": "Esthetics", "program": "Esthetics Part Time Evening", "start_date": "2025-09-16", "end_date": "2026-07-07", "weekday": "Tuesday", "language": "English" },
+                { "category": "Esthetics", "program": "Esthetics Wednesday, Thursday and Friday", "start_date": "2025-09-17", "end_date": "2026-07-10", "weekday": "Wednesday", "language": "English" },
+                { "category": "Esthetics", "program": "Esthetics Full Time", "start_date": "2025-09-22", "end_date": "2026-01-30", "weekday": "Monday", "language": "English" },
+                { "category": "Nails", "program": "Nails Part Time Evening", "start_date": "2025-09-23", "end_date": "2026-01-28", "weekday": "Tuesday", "language": "English" },
+                { "category": "Nails", "program": "Nails Monday and Tuesday", "start_date": "2025-09-29", "end_date": "2026-02-02", "weekday": "Monday", "language": "English" }
+            ]
+        },
+        {
+            "name": "October",
+            "courses": [
+                { "category": "Esthetics", "program": "Esthetics Part Time Weekend", "start_date": "2025-10-11","end_date": "2026-07-19", "weekday": "Saturday", "language": "English" },
+                { "category": "Nails", "program": "Nails Part Time Weekend", "start_date": "2025-10-11", "end_date": "2026-02-08", "weekday": "Saturday", "language": "English" },
+                { "category": "Esthetics", "program": "Esthetics Full Time", "start_date": "2025-10-22", "end_date": "2026-03-04", "weekday": "Wednesday", "language": "English" },
+                { "category": "Waxing", "program": "Waxing", "start_date": "2025-10-05", "end_date": "2025-11-10", "weekday": "Sunday", "language": "English" }
+            ]
+        },
+        {
+            "name": "November",
+            "courses": [
+                { "category": "Esthetics", "program": "Esthetics Part Time Spanish", "start_date": "2025-11-03", "end_date": "2026-05-04", "weekday": "Monday", "language": "Spanish" },
+                { "category": "Esthetics", "program": "Esthetics Monday and Tuesday", "start_date": "2025-11-17", "end_date": "2026-09-01", "weekday": "Monday", "language": "English" },
+                { "category": "CIDESCO", "program": "AE CIDESCO", "start_date": "2025-11-10", "end_date": "2025-12-16", "weekday": "Monday", "language": "English" }
+            ]
+        },
+        {
+            "name": "December",
+            "courses": [
+                { "category": "Esthetics", "program": "Esthetics Part Time Evening", "start_date": "2025-12-01", "end_date": "2026-09-21", "weekday": "Monday", "language": "English" },
+                { "category": "Esthetics", "program": "Esthetics Full Time", "start_date": "2025-12-01", "end_date": "2026-04-10", "weekday": "Monday", "language": "English" },
+                { "category": "Esthetics", "program": "Esthetics Wednesday Thursday and Fridays", "start_date": "2025-12-03", "end_date": "2026-09-23", "weekday": "Wednesday", "language": "English" },
+                { "category": "Nails", "program": "Nails Monday and Tuesday", "start_date": "2025-12-01", "end_date": "2026-04-07", "weekday": "Monday", "language": "English" },
+                { "category": "Nails", "program": "Nails Part Time Evening", "start_date": "2025-12-01", "end_date": "2026-04-08", "weekday": "Monday", "language": "English" }
+            ]
+        }
+    ]
+}
+
     
 def get_contextual_sophia_prompt(history=[], user_query=""):
     """
@@ -481,7 +525,7 @@ DO NOT ask for this information again."""
 - **NO RAG DATA**: If RAG context lacks future dates, reply: "Let me get current schedule information for you"
 - **VALIDATION FAILURE**: If no valid future dates found, reply: "No upcoming dates available, please contact our Enrollment Advisor"
 - **DATA SOURCES**: 
-  - NY programs: new_york_course_schedule_2025.txt
+  - NY programs: {course_schedule}
   - NJ programs: nj_course_schedule_2025_FULL.txt
   - Barbering: Both NY and NJ schedule files contain Barbering programs
 
@@ -493,7 +537,7 @@ DO NOT ask for this information again."""
     1. The standalone Makeup Program (Basic & Advanced Makeup, 70 hours)
     2. The Makeup module within Esthetics (2-week clinic)
   - If they mean the module: filter dates from NY_makeup_modules_2025.txt
-  - If they mean the standalone program: return data from course_schedule
+  - If they mean the standalone program: return data from {course_schedule}
 - If a course is listed as "Spanish" and the user has not explicitly requested Spanish, provide the English-language alternative instead
 
 **STRICT PRICING OUTPUT RULE:**
