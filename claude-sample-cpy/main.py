@@ -7,6 +7,8 @@ from flask import Request, jsonify, make_response
 import functions_framework
 from markdown import markdown as md_to_html
 from selectolax.parser import HTMLParser
+from datetime import datetime
+
 
 # Import your updated system prompt functions
 from systemprompt import get_system_prompt_for_request, detect_enrollment_completion_state, extract_contact_info
@@ -34,8 +36,8 @@ CORPUS_RESOURCE = os.environ.get(
 # Optimized for better context + speed balance
 USE_SUMMARIZER = True
 MAX_TURNS = 15  # Increased for better context retention
-RAG_TOP_K = 6   # Reduced for speed while maintaining quality
-RAG_SNIPPET_LENGTH = 1500  # Shorter snippets for faster processing
+RAG_TOP_K = 10   # Reduced for speed while maintaining quality
+RAG_SNIPPET_LENGTH = 2500  # Shorter snippets for faster processing
 
 # ---------------- Init ----------------
 init(project=PROJECT_ID, location=REGION)
@@ -398,6 +400,7 @@ def app(request: Request):
         # Get optimized system prompt
         start_prompt = time.time()
         system_prompt = get_system_prompt_for_request(history, user_query)
+        system_prompt += f"\n\nIMPORTANT: Today's date is {datetime.now().strftime('%Y-%m-%d')}. Never mention or suggest any course start dates that are in the past. Only provide current and future program start dates."
         latency_prompt = round(time.time() - start_prompt, 3)
         
         # Build optimized message history
