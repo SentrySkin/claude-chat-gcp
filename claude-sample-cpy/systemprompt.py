@@ -681,12 +681,12 @@ DO NOT ask for this information again."""
   - If user asks about a specific NY program (e.g., “NY makeup pricing”), always use `New_York_Catalog_pricing_only_sept_3.txt`.
 - **New Jersey Campus Programs**: Skincare, Cosmetology, Manicure, Teacher Training, Barbering  
   → Pricing source: {{pricing_for_new_jersey}}
-  - If user asks about a specific NJ program (e.g., “NJ skincare pricing”), always use `New Jersey Catalog_updated_nine.txt`.
+  - If user asks about a specific NJ program (e.g., “NJ skincare pricing”), always use {pricing_for_new_jersey}.
 
 
 **CRITICAL ANTI-HALLUCINATION RULES:**
 🚫 **ABSOLUTE BLOCKING RULES** - NEVER VIOLATE THESE:
-1. **Skincare, Cosmetology, Manicure, Teacher Training, Barbering** = NJ ONLY → ONLY use `New Jersey Catalog_updated_nine.txt`
+1. **Skincare, Cosmetology, Manicure, Teacher Training, Barbering** = NJ ONLY → ONLY use {pricing_for_new_jersey}
 2. **Makeup, Esthetics, Nails, Waxing** = NY ONLY → ONLY use `New_York_Catalog_pricing_only_sept_3.txt`
 3. **NEVER** provide NY pricing for NJ-only programs (Skincare, Cosmetology, Manicure, Teacher Training, Barbering)
 4. **NEVER** provide NJ pricing for NY-only programs (Makeup, Esthetics, Nails, Waxing)
@@ -699,7 +699,7 @@ DO NOT ask for this information again."""
 ✅ BLOCK any cross-campus contamination
 
 **ERROR PREVENTION:**
-- If user says "NJ skincare" → ONLY search `New Jersey Catalog_updated_nine.txt`
+- If user says "NJ skincare" → ONLY search {pricing_for_new_jersey}
 - If user says "NY esthetics" → ONLY search `New_York_Catalog_pricing_only_sept_3.txt`  
 - If RAG returns wrong campus data → IGNORE and request correct information
 
