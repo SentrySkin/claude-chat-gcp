@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 today = time.strftime("%Y-%m-%d")
 today_date = datetime.strptime(today, "%Y-%m-%d")
 
-course_schedule = {
+course_schedule_new_york = {
     "year": 2025,
     "months": [
         {
@@ -48,6 +48,61 @@ course_schedule = {
         }
     ]
 }
+course_schedule_for_new_jersey = {
+    "year": 2025,
+    "months": [
+        {
+            "name": "September",
+            "courses": [
+                { "category": "Teaching Training", "program": "Teaching Training Part Time Evening", "start_date": "2025-09-08", "end_date": "2026-09-09", "weekday": "Monday", "language": "English" }
+            ]
+        },
+        {
+            "name": "October",
+            "courses": [
+                { "category": "Skin Care", "program": "Skin Care Full Time Day", "start_date": "2025-10-06", "end_date": "2026-02-13", "weekday": "Monday", "language": "English" },
+                { "category": "Skin Care", "program": "Skin Care Part Time Day", "start_date": "2025-10-06", "end_date": "2026-04-23", "weekday": "Monday", "language": "English" },
+                { "category": "Skin Care", "program": "Skin Care Part Time Evening", "start_date": "2025-10-06", "end_date": "2026-07-13", "weekday": "Monday", "language": "English" },
+                { "category": "Skin Care", "program": "Skin Care Part Time Evening (Spanish)", "start_date": "2025-10-06", "end_date": "2026-07-13", "weekday": "Monday", "language": "Spanish" },
+                { "category": "Manicure", "program": "Manicure Full Time (Mon–Thu)", "start_date": "2025-10-06", "end_date": "2025-12-18", "weekday": "Monday", "language": "English" },
+                { "category": "Barbering", "program": "Barbering Full Time Day", "start_date": "2025-10-06", "end_date": "2026-04-16", "weekday": "Monday", "language": "English" },
+                { "category": "Teaching Training", "program": "Teaching Training Full Time Day", "start_date": "2025-10-06", "end_date": "2026-02-13", "weekday": "Monday", "language": "English" },
+                { "category": "Teaching Training", "program": "Teaching Training Part Time Day", "start_date": "2025-10-06", "end_date": "2026-05-04", "weekday": "Monday", "language": "English" },
+                { "category": "Teaching Training", "program": "Teaching Training Part Time Evening", "start_date": "2025-10-06", "end_date": "2026-10-07", "weekday": "Monday", "language": "English" }
+            ]
+        },
+        {
+            "name": "November",
+            "courses": [
+                { "category": "Skin Care", "program": "Skin Care Full Time Day", "start_date": "2025-11-03", "end_date": "2026-03-16", "weekday": "Monday", "language": "English" },
+                { "category": "Skin Care", "program": "Skin Care Part Time Day", "start_date": "2025-11-03", "end_date": "2026-05-21", "weekday": "Monday", "language": "English" },
+                { "category": "Skin Care", "program": "Skin Care Part Time Evening", "start_date": "2025-11-03", "end_date": "2026-08-10", "weekday": "Monday", "language": "English" },
+                { "category": "Skin Care", "program": "Skin Care Part Time Evening (Spanish)", "start_date": "2025-11-03", "end_date": "2026-08-10", "weekday": "Monday", "language": "Spanish" },
+                { "category": "Barbering", "program": "Barbering Full Time Day", "start_date": "2025-11-03", "end_date": "2026-05-14", "weekday": "Monday", "language": "English" },
+                { "category": "Teaching Training", "program": "Teaching Training Full Time Day", "start_date": "2025-11-03", "end_date": "2026-03-16", "weekday": "Monday", "language": "English" },
+                { "category": "Teaching Training", "program": "Teaching Training Part Time Day", "start_date": "2025-11-03", "end_date": "2026-07-02", "weekday": "Monday", "language": "English" },
+                { "category": "Teaching Training", "program": "Teaching Training Part Time Evening", "start_date": "2025-11-03", "end_date": "2026-11-04", "weekday": "Monday", "language": "English" },
+                { "category": "Cosmetology", "program": "Cosmetology Full Time Day", "start_date": "2025-11-03", "end_date": "2026-07-17", "weekday": "Monday", "language": "English" },
+                { "category": "Cosmetology", "program": "Cosmetology Part Time Evening", "start_date": "2025-11-03", "end_date": "2027-03-17", "weekday": "Monday", "language": "English" },
+                { "category": "Cosmetology", "program": "Cosmetology Part Time Evening (Spanish)", "start_date": "2025-11-03", "end_date": "2027-03-17", "weekday": "Monday", "language": "Spanish" }
+            ]
+        },
+        {
+            "name": "December",
+            "courses": [
+                { "category": "Skin Care", "program": "Skin Care Full Time Day", "start_date": "2025-12-08", "end_date": "2026-04-16", "weekday": "Monday", "language": "English" },
+                { "category": "Skin Care", "program": "Skin Care Part Time Day", "start_date": "2025-12-08", "end_date": "2026-06-25", "weekday": "Monday", "language": "English" },
+                { "category": "Skin Care", "program": "Skin Care Part Time Evening", "start_date": "2025-12-08", "end_date": "2026-09-10", "weekday": "Monday", "language": "English" },
+                { "category": "Skin Care", "program": "Skin Care Part Time Evening (Spanish)", "start_date": "2025-12-08", "end_date": "2026-09-10", "weekday": "Monday", "language": "Spanish" },
+                { "category": "Barbering", "program": "Barbering Full Time Day", "start_date": "2025-12-08", "end_date": "2026-06-17", "weekday": "Monday", "language": "English" },
+                { "category": "Teaching Training", "program": "Teaching Training Full Time Day", "start_date": "2025-12-08", "end_date": "2026-04-16", "weekday": "Monday", "language": "English" },
+                { "category": "Teaching Training", "program": "Teaching Training Part Time Day", "start_date": "2025-12-08", "end_date": "2026-07-07", "weekday": "Monday", "language": "English" },
+                { "category": "Teaching Training", "program": "Teaching Training Part Time Evening", "start_date": "2025-12-08", "end_date": "2026-12-09", "weekday": "Monday", "language": "English" }
+            ]
+        }
+    ]
+}
+
 def detect_language(user_query, history):
     """
     Detect user's preferred language from query and history
@@ -537,8 +592,8 @@ DO NOT ask for this information again."""
 - **NO RAG DATA**: If RAG context lacks future dates, reply: "Let me get current schedule information for you"
 - **VALIDATION FAILURE**: If no valid future dates found, reply: "No upcoming dates available, please contact our Enrollment Advisor"
 - **DATA SOURCES**: 
-  - NY programs (Makeup, Esthetics, Nails, Waxing): {course_schedule}
-  - NJ programs (Skincare, Cosmetology, Manicure, Teacher Training, Barbering): nj_course_schedule_2025_FULL.txt
+  - NY programs (Makeup, Esthetics, Nails, Waxing): {course_schedule_new_york}
+  - NJ programs (Skincare, Cosmetology, Manicure, Teacher Training, Barbering): {course_schedule_for_new_jersey}
   - Barbering: ONLY available at New Jersey campus
 
 **MAKEUP MODULE NOTE:**
@@ -549,7 +604,7 @@ DO NOT ask for this information again."""
     1. The standalone Makeup Program (Basic & Advanced Makeup, 70 hours)
     2. The Makeup module within Esthetics (2-week clinic)
   - If they mean the module: filter dates from NY_makeup_modules_2025.txt
-  - If they mean the standalone program: return data from {course_schedule}
+  - If they mean the standalone program: return data from {course_schedule_new_york}
 - If a course is listed as "Spanish" and the user has not explicitly requested Spanish, provide the English-language alternative instead
 
 **STRICT PRICING OUTPUT RULE:**
