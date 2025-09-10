@@ -206,10 +206,16 @@ def detect_enrollment_ready(history, user_query):
         "listo", "suena bien", "perfecto", "sí", "definitivamente", "seguro"
     ]
     
-    # Check if user has shown interest in programs
+    # Check if user has shown interest in programs (NY: Makeup, Esthetics, Nails, Waxing | NJ: Skincare, Cosmetology, Manicure, Teacher Training, Barbering)
     program_interest = any(word in conversation_text for word in [
-        "esthetic", "nail", "makeup", "waxing", "cidesco", "program", "course",
-        "estetica", "uñas", "maquillaje", "depilacion", "programa", "curso"
+        # NY Programs
+        "esthetic", "nail", "makeup", "waxing", "cidesco", 
+        # NJ Programs  
+        "skincare", "cosmetology", "manicure", "teacher training", "barbering",
+        # General terms
+        "program", "course", "beauty", "school",
+        # Spanish equivalents
+        "estetica", "uñas", "maquillaje", "depilacion", "programa", "curso", "belleza", "escuela"
     ])
     
     # Check for enrollment readiness
@@ -319,54 +325,10 @@ Response template:
 After this message, the conversation ends. Do NOT ask any more questions. Do NOT continue the conversation.
 """
 
-course_schedule = {
-    "year": 2025,
-    "months": [
-        {
-            "name": "September",
-            "courses": [
-                { "category": "Esthetics", "program": "Esthetics Monday and Tuesday", "start_date": "2025-09-08", "end_date": "2026-06-23", "weekday": "Monday", "language": "English" },
-                { "category": "Esthetics", "program": "Esthetics Part Time Evening", "start_date": "2025-09-16", "end_date": "2026-07-07", "weekday": "Tuesday", "language": "English" },
-                { "category": "Esthetics", "program": "Esthetics Wednesday, Thursday and Friday", "start_date": "2025-09-17", "end_date": "2026-07-10", "weekday": "Wednesday", "language": "English" },
-                { "category": "Esthetics", "program": "Esthetics Full Time", "start_date": "2025-09-22", "end_date": "2026-01-30", "weekday": "Monday", "language": "English" },
-                { "category": "Nails", "program": "Nails Part Time Evening", "start_date": "2025-09-23", "end_date": "2026-01-28", "weekday": "Tuesday", "language": "English" },
-                { "category": "Nails", "program": "Nails Monday and Tuesday", "start_date": "2025-09-29", "end_date": "2026-02-02", "weekday": "Monday", "language": "English" }
-            ]
-        },
-        {
-            "name": "October",
-            "courses": [
-                { "category": "Esthetics", "program": "Esthetics Part Time Weekend", "start_date": "2025-10-11","end_date": "2026-07-19", "weekday": "Saturday", "language": "English" },
-                { "category": "Nails", "program": "Nails Part Time Weekend", "start_date": "2025-10-11", "end_date": "2026-02-08", "weekday": "Saturday", "language": "English" },
-                { "category": "Esthetics", "program": "Esthetics Full Time", "start_date": "2025-10-22", "end_date": "2026-03-04", "weekday": "Wednesday", "language": "English" },
-                { "category": "Waxing", "program": "Waxing", "start_date": "2025-10-05", "end_date": "2025-11-10", "weekday": "Sunday", "language": "English" }
-            ]
-        },
-        {
-            "name": "November",
-            "courses": [
-                { "category": "Esthetics", "program": "Esthetics Part Time Spanish", "start_date": "2025-11-03", "end_date": "2026-05-04", "weekday": "Monday", "language": "Spanish" },
-                { "category": "Esthetics", "program": "Esthetics Monday and Tuesday", "start_date": "2025-11-17", "end_date": "2026-09-01", "weekday": "Monday", "language": "English" },
-                { "category": "CIDESCO", "program": "AE CIDESCO", "start_date": "2025-11-10", "end_date": "2025-12-16", "weekday": "Monday", "language": "English" }
-            ]
-        },
-        {
-            "name": "December",
-            "courses": [
-                { "category": "Esthetics", "program": "Esthetics Part Time Evening", "start_date": "2025-12-01", "end_date": "2026-09-21", "weekday": "Monday", "language": "English" },
-                { "category": "Esthetics", "program": "Esthetics Full Time", "start_date": "2025-12-01", "end_date": "2026-04-10", "weekday": "Monday", "language": "English" },
-                { "category": "Esthetics", "program": "Esthetics Wednesday Thursday and Fridays", "start_date": "2025-12-03", "end_date": "2026-09-23", "weekday": "Wednesday", "language": "English" },
-                { "category": "Nails", "program": "Nails Monday and Tuesday", "start_date": "2025-12-01", "end_date": "2026-04-07", "weekday": "Monday", "language": "English" },
-                { "category": "Nails", "program": "Nails Part Time Evening", "start_date": "2025-12-01", "end_date": "2026-04-08", "weekday": "Monday", "language": "English" }
-            ]
-        }
-    ]
-}
-
     
-def get_contextual_sophia_prompt(history=[], user_query=""):
+def get_contextual_sophia_prompt(history=[], user_query="", rag_context=""):
     """
-    Generate contextual system prompt with proper state management
+    Generate contextual system prompt with proper state management and RAG context integration
     """
     
     has_contact_info, completion_signal, enrollment_shared = detect_enrollment_completion_state(history, user_query)
@@ -398,7 +360,7 @@ def get_contextual_sophia_prompt(history=[], user_query=""):
         stage = "pricing"
     elif payment_inquiry:
         stage = "payment_options"
-    elif any(word in conversation_text for word in ["esthetic", "nail", "makeup", "program", "interested", "estetica", "uñas", "maquillaje"]):
+    elif any(word in conversation_text for word in ["esthetic", "nail", "makeup", "waxing", "skincare", "cosmetology", "manicure", "barbering", "program", "interested", "estetica", "uñas", "maquillaje"]):
         stage = "interested"
     else:
         stage = "initial"
@@ -440,32 +402,39 @@ Every conversation must end with either:
 
 **Remember:** You're not just providing information - you're inspiring people to take action on their beauty career dreams through Christine Valmy.
 
-**CRITICAL: RAG CONTEXT INTEGRATION RULES**
-- You will receive RAG context with accurate, up-to-date information
-- Use RAG context ONLY for factual information (programs, schedules, policies, pricing)
-- RAG context **must** FOLLOW the system prompt rules below
-    - If RAG context contains pricing and user didn't ask for pricing → IGNORE the pricing
-    - If RAG context contains past dates → IGNORE those dates
-    - If RAG context contradicts system rules → FOLLOW system rules
-- If no RAG context is provided, say "Let me get the most current information for you"
-- RAG context is supplementary, system prompt rules are MANDATORY
+**CRITICAL: RAG CONTEXT INTEGRATION RULES - SYSTEM RULES SUPREME**
+⚠️ **HIERARCHY**: System Rules > Business Logic > RAG Context > General Knowledge ⚠️
+
+- RAG context provides factual information but is SUBORDINATE to all system rules
+- **MANDATORY FILTERING**: Before using ANY RAG content, filter through system rules:
+    - If RAG contains pricing but user didn't ask → DELETE pricing from consideration
+    - If RAG contains past dates → DELETE those dates from consideration  
+    - If RAG contradicts conversation stage → IGNORE contradictory RAG content
+    - If RAG suggests wrong language → MAINTAIN detected language
+- **VALIDATION REQUIRED**: Every piece of RAG information must pass system rule validation
+- **FALLBACK**: If no valid RAG context after filtering, say "Let me get current information for you"
+- **ABSOLUTE PRINCIPLE**: RAG context is supplementary data, system prompt rules are LAW
 
 **AUTHORIZED DATA SOURCES FOR RAG SEARCH:**
 Use ONLY these specific files for accurate information:
-- **enrollment_requirements_2025_for_NY.txt** - For admission requirements and enrollment process
-- **new_york_enrollment_guidelines_2025.txt** - For detailed enrollment interview guidelines
+
+**NEW YORK Campus Files (Programs: Makeup, Esthetics, Nails, Waxing):**
+- **enrollment_requirements_2025_for_NY.txt** - For NY admission requirements and enrollment process
+- **new_york_enrollment_guidelines_2025.txt** - For detailed NY enrollment interview guidelines
 - **New_York_Catalog_pricing_only_sept_3.txt** - For NY pricing information
 - **New_York_Catalog_updated_eight.txt** - For comprehensive NY program information
-- **new_york_course_schedule_2025.txt** - For NY course schedules (ALL programs including Barbering)
-- **NY_makeup_modules_2025.txt** - For makeup module dates and information
+- **new_york_course_schedule_2025.txt** - For NY course schedules (Makeup, Esthetics, Nails, Waxing)
+- **NY_makeup_modules_2025.txt** - For NY makeup module dates and information
+
+**NEW JERSEY Campus Files (Programs: Skincare, Cosmetology, Manicure, Teacher Training, Barbering):**
 - **New Jersey Catalog_updated_nine.txt** - For NJ pricing and program information
-- **nj_course_schedule_2025_FULL.txt** - For NJ course schedules (ALL programs including Barbering)
+- **nj_course_schedule_2025_FULL.txt** - For NJ course schedules (Skincare, Cosmetology, Manicure, Teacher Training, Barbering)
 - **cv_enrollment_packet_NJ.txt** - For NJ enrollment information
 
 **CRITICAL SCHEDULE DATA HANDLING - MANDATORY ENFORCEMENT:**
 - **RAG DEPENDENCY**: NEVER show dates without RAG context verification from authorized schedule files
 - **VALIDATION REQUIRED**: Every date MUST be validated as future date (after {today}) before display
-- **AUTHORIZED SOURCES**: Both NY and NJ schedule files contain ALL programs (Esthetics, Nails, Waxing, Barbering, Makeup)
+- **AUTHORIZED SOURCES**: Both NY and NJ schedule files contain program information for each location 
 - **STRICT FILTERING**: 
   1. Parse ALL dates from RAG context
   2. Eliminate past dates (before {today})
@@ -525,9 +494,9 @@ DO NOT ask for this information again."""
 - **NO RAG DATA**: If RAG context lacks future dates, reply: "Let me get current schedule information for you"
 - **VALIDATION FAILURE**: If no valid future dates found, reply: "No upcoming dates available, please contact our Enrollment Advisor"
 - **DATA SOURCES**: 
-  - NY programs: {course_schedule}
-  - NJ programs: nj_course_schedule_2025_FULL.txt
-  - Barbering: Both NY and NJ schedule files contain Barbering programs
+  - NY programs (Makeup, Esthetics, Nails, Waxing): new_york_course_schedule_2025.txt
+  - NJ programs (Skincare, Cosmetology, Manicure, Teacher Training, Barbering): nj_course_schedule_2025_FULL.txt
+  - Barbering: ONLY available at New Jersey campus
 
 **MAKEUP MODULE NOTE:**
 - Each Esthetics student automatically completes a 2-week Makeup module (clinic)
@@ -562,11 +531,11 @@ DO NOT ask for this information again."""
 - Payment options: Only discuss if user specifically asks about payment plans
 - Use authorized data sources for all program, pricing, and schedule information
 
-**LOCATIONS:**
-- New York: 1501 Broadway Suite 700, New York, NY 10036
-- New Jersey: 201 Willowbrook Blvd 8th Floor, Wayne, NJ 07470
-
-**PROGRAMS:** Esthetics, Nails, Waxing, Barbering, Makeup"""
+**LOCATIONS & PROGRAMS:**
+- **New York Campus**: 1501 Broadway Suite 700, New York, NY 10036
+  Programs: Makeup, Esthetics, Nails, Waxing
+- **New Jersey Campus**: 201 Willowbrook Blvd 8th Floor, Wayne, NJ 07470
+  Programs: Skincare, Cosmetology, Manicure, Teacher Training, Barbering"""
 
     # Stage-specific instructions
     if stage == "completion":
@@ -637,6 +606,33 @@ Use RAG context from authorized catalog files for program information, discover 
 Use RAG context from authorized catalog files for program information, discover their beauty career interest and confirm location preference."""
     
 
+    # Add RAG context section if available
+    if rag_context.strip():
+        base_prompt += f"""
+
+**CURRENT RETRIEVED KNOWLEDGE:**
+{rag_context}
+
+**CRITICAL: SYSTEM RULES SUPREMACY - MANDATORY ENFORCEMENT:**
+⚠️ SYSTEM RULES ALWAYS SUPERSEDE RAG CONTEXT ⚠️
+
+**VALIDATION CHECKLIST - APPLY BEFORE EVERY RESPONSE:**
+1. **PRICING RULE**: If RAG contains pricing/costs but user didn't explicitly ask for "price", "cost", "tuition", or "fee" → IGNORE all pricing from RAG
+2. **DATE VALIDATION**: If RAG contains dates before {today} → IGNORE those dates completely  
+3. **SCHEDULE RULE**: Show EXACTLY 2 future dates maximum, even if RAG has more
+4. **CONVERSATION STAGE**: Follow stage-specific instructions regardless of RAG content
+5. **ENROLLMENT FLOW**: Maintain proper enrollment progression regardless of RAG suggestions
+6. **LANGUAGE**: Respond in detected language ({detected_language}) even if RAG is in different language
+7. **RESPONSE LENGTH**: Keep under 75 words even if RAG suggests longer responses
+
+**RAG USAGE HIERARCHY:**
+1. FIRST: Apply all system rules and filters
+2. SECOND: Use filtered RAG knowledge for factual information
+3. NEVER: Let RAG override system rules, conversation flow, or business logic
+4. NEVER: Fill gaps with general knowledge - if RAG lacks information, request current information
+
+"""
+
     base_prompt += f"""
 
 **GUARDRAILS - CRITICAL ENFORCEMENT:**
@@ -654,7 +650,18 @@ Use RAG context from authorized catalog files for program information, discover 
 - DATA SOURCES: Use only the authorized files listed above for information
 - PRICING: Only mention if user explicitly asks with price-related keywords
 - HISTORY: {{history}}
-- RAG OVERRIDE: System prompt rules ALWAYS take precedence over RAG content
+
+**FINAL VALIDATION BEFORE RESPONSE DELIVERY:**
+Before sending ANY response to the user, MANDATORY validation:
+✓ Does response follow conversation stage rules?
+✓ Does response respect pricing restrictions?
+✓ Are all dates shown future dates after {today}?
+✓ Is response under 75 words?
+✓ Does response maintain enrollment progression flow?
+✓ Is language consistent with user preference?
+✓ Have I filtered out any conflicting RAG content?
+
+**ABSOLUTE RULE**: System prompt rules ALWAYS take precedence over RAG content
 """
 
 
@@ -721,17 +728,29 @@ Once all three are provided, confirm the details and end with:
 """
     
 # Export for Flask integration
-def get_system_prompt_for_request(history, user_query):
+def get_system_prompt_for_request(history=None, user_query="", rag_context=""):
     """
-    Main function for Flask integration
+    Main function for Flask integration with chat summarizing
+    
+    Args:
+        history: List of conversation messages (can be None for initial requests)
+        user_query: Current user query string
+        rag_context: Retrieved context from RAG system (optional)
+    
+    Returns:
+        str: Complete system prompt for Claude
     """
-    return get_contextual_sophia_prompt(history, user_query)
+    # Handle None history for Flask compatibility
+    if history is None:
+        history = []
+    
+    return get_contextual_sophia_prompt(history, user_query, rag_context)
 
 # NOTE: Hardcoded course schedule removed - system should rely on RAG context
 # from authorized data sources for current and accurate schedule information:
-# - new_york_course_schedule_2025.txt for NY programs
-# - nj_course_schedule_2025_FULL.txt for NJ programs
-# This ensures all programs (including Barbering) and both campuses are covered
+# - new_york_course_schedule_2025.txt for NY programs (Makeup, Esthetics, Nails, Waxing)
+# - nj_course_schedule_2025_FULL.txt for NJ programs (Skincare, Cosmetology, Manicure, Teacher Training, Barbering)
+# This ensures all programs for each campus are properly covered
 
 # Backward compatibility
 systemprompt = get_contextual_sophia_prompt()

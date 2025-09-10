@@ -421,14 +421,14 @@ def app(request: Request):
         context_str = "\n\n---\n".join(snippets)
         latency_retrieve = round(time.time() - start_rag, 3)
         
-        # Get optimized system prompt
+        # Get optimized system prompt with RAG context integrated
         start_prompt = time.time()
-        system_prompt = get_system_prompt_for_request(history, user_query)
+        system_prompt = get_system_prompt_for_request(history, user_query, context_str)
         system_prompt += f"\n\nCRITICAL DATE VALIDATION: Today's date is {datetime.now().strftime('%Y-%m-%d')}. MANDATORY REQUIREMENTS: 1) VERIFY every date from RAG context is after today before displaying, 2) Show EXACTLY TWO upcoming future start dates only, 3) Check conversation history to avoid repeating identical schedule information, 4) If RAG lacks future dates, request current information. NEVER guess or assume dates."
         latency_prompt = round(time.time() - start_prompt, 3)
         
-        # Build optimized message history
-        base_prompt = f"Retrieved context:\n{context_str}\n\nUser question: {user_query}" if context_str else f"User question: {user_query}"
+        # Build optimized message history (no longer need RAG context in user message)
+        base_prompt = f"User question: {user_query}"
         messages = build_optimized_history(history, base_prompt, conversation_stage)
 
         # Get optimized Claude parameters
