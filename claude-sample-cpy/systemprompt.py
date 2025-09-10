@@ -102,6 +102,60 @@ course_schedule_for_new_jersey = {
         }
     ]
 }
+pricing_for_new_jersey={
+  "location": "New Jersey",
+  "year": 2025,
+  "programs": [
+    {
+      "category": "Cosmetology & Hairstyling","hours": 1200,"total_cost": "$17,500","breakdown": {
+        "registration_fee": "$100",
+        "books_kit": "$975",
+        "tuition": "$16,425"
+      }
+    },
+    {
+      "category": "Skin Care",
+      "hours": 600,
+      "total_cost": "$13,000",
+      "breakdown": {
+        "registration_fee": "$100",
+        "books_kit": "$685",
+        "tuition": "$12,215"
+      }
+    },
+    {
+      "category": "Barbering",
+      "hours": 900,
+      "total_cost": "$14,900",
+      "breakdown": {
+        "registration_fee": "$100",
+        "books_kit": "$850",
+        "tuition": "$13,950"
+      }
+    },
+    {
+      "category": "Manicure",
+      "hours": 300,
+      "total_cost": "$4,700",
+      "breakdown": {
+        "registration_fee": "$100",
+        "books_kit": "$500",
+        "tuition": "$4,100"
+      }
+    },
+    {
+      "category": "Teacher Training",
+      "hours": 600,
+      "total_cost": "$6,995",
+      "breakdown": {
+        "registration_fee": "$100",
+        "books_kit": "$875",
+        "tuition": "$6,020"
+      }
+    }
+  ]
+}
+
 
 def detect_language(user_query, history):
     """
@@ -626,7 +680,7 @@ DO NOT ask for this information again."""
   → Pricing source: `New_York_Catalog_pricing_only_sept_3.txt`
   - If user asks about a specific NY program (e.g., “NY makeup pricing”), always use `New_York_Catalog_pricing_only_sept_3.txt`.
 - **New Jersey Campus Programs**: Skincare, Cosmetology, Manicure, Teacher Training, Barbering  
-  → Pricing source: `New Jersey Catalog_updated_nine.txt`
+  → Pricing source: {{pricing_for_new_jersey}}
   - If user asks about a specific NJ program (e.g., “NJ skincare pricing”), always use `New Jersey Catalog_updated_nine.txt`.
 
 
