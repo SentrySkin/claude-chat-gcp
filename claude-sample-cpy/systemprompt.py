@@ -316,10 +316,14 @@ def detect_enrollment_ready(history, user_query):
         "estetica", "uñas", "maquillaje", "depilacion", "programa", "curso", "belleza", "escuela"
     ])
     
-    # Check for enrollment readiness
-    enrollment_ready = any(signal in user_query.lower() for signal in enrollment_signals)
+    # Check for enrollment readiness in BOTH current query AND conversation history
+    current_query_signals = any(signal in user_query.lower() for signal in enrollment_signals)
+    history_signals = any(signal in conversation_text for signal in enrollment_signals)
     
-    return enrollment_ready and program_interest
+    # User is enrollment ready if they show signals AND program interest
+    enrollment_ready = (current_query_signals or history_signals) and program_interest
+    
+    return enrollment_ready
 
 def detect_enrollment_info_collected(history):
     """
@@ -445,18 +449,22 @@ def get_contextual_sophia_prompt(history=[], user_query="", rag_context=""):
         for msg in history if msg.get("content")
     ]).lower()
     
-    # Determine stage
+    # Determine stage with clear priority order
     if has_contact_info and completion_signal and enrollment_shared:
         stage = "completion"
     elif has_contact_info and enrollment_shared:
-        stage = "post_enrollment"
-    elif has_contact_info:
+        stage = "post_enrollment"  
+    elif has_contact_info and not enrollment_shared:
         stage = "enrollment_ready"
     elif enrollment_ready and not enrollment_info_collected:
+        # CRITICAL: User is ready to enroll but we don't have their info yet
         stage = "enrollment_collection"
-    elif pricing_inquiry:
+    elif enrollment_info_collected and not enrollment_shared:
+        # User provided info but we haven't shared enrollment confirmation yet
+        stage = "enrollment_ready"
+    elif pricing_inquiry and not enrollment_ready:
         stage = "pricing"
-    elif payment_inquiry:
+    elif payment_inquiry and not enrollment_ready:
         stage = "payment_options"
     elif any(word in conversation_text for word in ["esthetic", "nail", "makeup", "waxing", "skincare", "cosmetology", "manicure", "barbering", "program", "interested", "estetica", "uñas", "maquillaje"]):
         stage = "interested"
@@ -622,16 +630,31 @@ DO NOT ask for this information again."""
   - If user asks about a specific NJ program (e.g., “NJ skincare pricing”), always use `New Jersey Catalog_updated_nine.txt`.
 
 
-✅ Always confirm the campus (NY vs NJ) from user query or history.  
-✅ NEVER mix campus pricing sources.  
-✅ If program is not in these mappings → respond:  
-*"Let me get current pricing information for you. Our enrollment officer can provide exact tuition details. Please share your **full name, email, and phone number** so they can reach out to you directly."*
+**CRITICAL ANTI-HALLUCINATION RULES:**
+🚫 **ABSOLUTE BLOCKING RULES** - NEVER VIOLATE THESE:
+1. **Skincare, Cosmetology, Manicure, Teacher Training, Barbering** = NJ ONLY → ONLY use `New Jersey Catalog_updated_nine.txt`
+2. **Makeup, Esthetics, Nails, Waxing** = NY ONLY → ONLY use `New_York_Catalog_pricing_only_sept_3.txt`
+3. **NEVER** provide NY pricing for NJ-only programs (Skincare, Cosmetology, Manicure, Teacher Training, Barbering)
+4. **NEVER** provide NJ pricing for NY-only programs (Makeup, Esthetics, Nails, Waxing)
+
+**VALIDATION CHECKLIST BEFORE ANY PRICING RESPONSE:**
+✅ Identify the specific program user is asking about
+✅ Confirm which campus offers that program (NY vs NJ)  
+✅ Use ONLY the correct catalog file for that campus
+✅ If unsure about campus/program match → request clarification
+✅ BLOCK any cross-campus contamination
+
+**ERROR PREVENTION:**
+- If user says "NJ skincare" → ONLY search `New Jersey Catalog_updated_nine.txt`
+- If user says "NY esthetics" → ONLY search `New_York_Catalog_pricing_only_sept_3.txt`  
+- If RAG returns wrong campus data → IGNORE and request correct information
 
 
 **RULES - MANDATORY COMPLIANCE:**
 - Keep responses under 75 words
 - End with ONE follow-up question (unless completing)
 - Only mention pricing if user asks: "price", "tuition", "cost", "fee", "costo", "precio", "cuanto"
+- **NEVER ask about preferred contact times or methods** - we cannot guarantee when/how enrollment advisor will contact
 - **DATE VALIDATION**: NEVER suggest dates before or equal to **{today}** - ONLY show FUTURE enrollment opportunities
 - **RAG VERIFICATION**: Every date must be verified from RAG context before display
 - **TWO DATES MAXIMUM**: Show exactly TWO upcoming future start dates, ordered soonest to latest
@@ -675,7 +698,16 @@ Watch for completion signals: "no", "nope", "sounds good", "no", "nada", "perfec
 
 **ENROLLMENT READY STAGE:**
 You have: {name}, {email}, {phone}
-Provide enrollment summary, then watch for completion signals."""
+**ALWAYS** PROVIDE CONFIRMATION SUMMARY in this format:
+"Perfect! Thank you for providing your information:
+- Name: {name}
+- Email: {email}
+- Phone: {phone}
+
+Is all this information correct? If yes, our enrollment advisor will contact you soon to discuss your program of interest and schedule a campus tour."
+
+**CRITICAL**: Do NOT ask about contact preferences, timing, or methods. Simply confirm info and end.
+Then watch for completion signals."""
     
     elif stage == "pricing":
         base_prompt += """
@@ -691,6 +723,25 @@ Use RAG context for pricing, explain that payment options are personalized, and 
     
     elif stage == "enrollment_collection":
         base_prompt += get_enrollment_collection_prompt(detected_language, name, email, phone, location_confirmed, history)
+        base_prompt += f"""
+
+**CRITICAL ENROLLMENT COLLECTION OVERRIDE:**
+IGNORE any instructions in the template that say "one by one" - you MUST ask for ALL missing contact information in a SINGLE response:
+- Full name
+- Email address  
+- Phone number
+- Campus preference (if not confirmed)
+
+Then in the NEXT response, provide a summary confirmation of all collected information.
+
+**PROHIBITED QUESTIONS AFTER CONTACT INFO COLLECTION:**
+🚫 NEVER ASK: "What's the best time to contact you?"
+🚫 NEVER ASK: "Do you prefer phone or email?"
+🚫 NEVER ASK: "When would you like them to call?"
+🚫 NEVER ASK: "What method of contact do you prefer?"
+🚫 NEVER ASK: Any questions about contact timing or preferences
+
+✅ INSTEAD: Simply confirm their information and state that the enrollment advisor will contact them soon."""
 
     elif stage == "interested":
         if location_confirmed:
@@ -771,6 +822,10 @@ Before sending ANY response to the user, MANDATORY validation:
 ✓ Does response maintain enrollment progression flow?
 ✓ Is language consistent with user preference?
 ✓ Have I filtered out any conflicting RAG content?
+✓ **CRITICAL**: If pricing mentioned, is correct campus catalog used?
+  - NJ programs (Skincare, Cosmetology, Manicure, Teacher Training, Barbering) → NJ catalog ONLY
+  - NY programs (Makeup, Esthetics, Nails, Waxing) → NY catalog ONLY
+✓ **PROHIBITED**: Does response ask about contact preferences/timing? (NEVER allowed)
 
 **ABSOLUTE RULE**: System prompt rules ALWAYS take precedence over RAG content
 """
