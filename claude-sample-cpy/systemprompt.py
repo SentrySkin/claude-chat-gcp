@@ -155,6 +155,143 @@ pricing_for_new_jersey={
     }
   ]
 }
+course_schedule_for_new_york_makeup={
+    "location": "New York",
+    "module": "MAKEUP/CLINIC",
+    "program_groups": [
+      {
+        "name": "FTD",
+        "label": "Full Time Day",
+        "sessions": [
+          { "start_date": "2025-02-10", "end_date": "2025-02-24" },
+          { "start_date": "2025-02-27", "end_date": "2025-03-12" },
+          { "start_date": "2025-03-13", "end_date": "2025-03-26" },
+          { "start_date": "2025-04-10", "end_date": "2025-04-23" },
+          { "start_date": "2025-04-24", "end_date": "2025-05-07" },
+          { "start_date": "2025-05-12", "end_date": "2025-05-23" },
+          { "start_date": "2025-05-26", "end_date": "2025-06-06" },
+          { "start_date": "2025-06-13", "end_date": "2025-06-26" },
+          { "start_date": "2025-06-27", "end_date": "2025-07-10" },
+          { "start_date": "2025-07-15", "end_date": "2025-07-28" },
+          { "start_date": "2025-07-29", "end_date": "2025-08-11" },
+          { "start_date": "2025-08-18", "end_date": "2025-08-29" },
+          { "start_date": "2025-09-01", "end_date": "2025-09-12" },
+          { "start_date": "2025-09-16", "end_date": "2025-09-29" },
+          { "start_date": "2025-09-30", "end_date": "2025-10-13" },
+          { "start_date": "2025-10-16", "end_date": "2025-10-29" },
+          { "start_date": "2025-10-30", "end_date": "2025-11-12" },
+          { "start_date": "2025-11-17", "end_date": "2025-12-02" },
+          { "start_date": "2025-12-03", "end_date": "2025-12-16" },
+          { "start_date": "2025-12-18", "end_date": "2026-01-06" },
+          { "start_date": "2026-01-07", "end_date": "2026-01-21" },
+          { "start_date": "2026-01-26", "end_date": "2026-02-06" },
+          { "start_date": "2026-02-09", "end_date": "2026-02-23" },
+          { "start_date": "2026-02-27", "end_date": "2026-03-12" },
+          { "start_date": "2026-03-13", "end_date": "2026-03-27" },
+          { "start_date": "2026-04-10", "end_date": "2026-04-23" },
+          { "start_date": "2026-04-24", "end_date": "2026-05-07" }
+        ]
+      },
+      {
+        "name": "WTF",
+        "label": "Wednesday Thursday Friday",
+        "sessions": [
+          { "start_date": "2025-09-10", "end_date": "2025-10-10" },
+          { "start_date": "2025-10-15", "end_date": "2025-11-13" },
+          { "start_date": "2025-11-26", "end_date": "2026-01-02" },
+          { "start_date": "2026-01-07", "end_date": "2026-02-05" },
+          { "start_date": "2026-02-20", "end_date": "2026-03-26" },
+          { "start_date": "2026-03-27", "end_date": "2026-04-29" },
+          { "start_date": "2026-05-06", "end_date": "2026-06-04" },
+          { "start_date": "2026-06-05", "end_date": "2026-07-10" },
+          { "start_date": "2026-07-22", "end_date": "2026-08-20" },
+          { "start_date": "2026-08-21", "end_date": "2026-09-23" },
+          { "start_date": "2026-10-02", "end_date": "2026-11-04" },
+          { "start_date": "2026-11-05", "end_date": "2026-12-10" }
+        ]
+      },
+      {
+        "name": "MT",
+        "label": "Monday Tuesday",
+        "sessions": [
+          { "start_date": "2025-02-18", "end_date": "2025-03-24" },
+          { "start_date": "2025-04-07", "end_date": "2025-05-13" },
+          { "start_date": "2025-05-19", "end_date": "2025-06-24" },
+          { "start_date": "2025-06-30", "end_date": "2025-08-05" },
+          { "start_date": "2025-09-02", "end_date": "2025-10-06" },
+          { "start_date": "2025-10-07", "end_date": "2025-11-10" },
+          { "start_date": "2025-11-18", "end_date": "2025-12-22" },
+          { "start_date": "2025-12-23", "end_date": "2026-01-26" },
+          { "start_date": "2026-02-02", "end_date": "2026-03-09" },
+          { "start_date": "2026-03-10", "end_date": "2026-04-13" },
+          { "start_date": "2026-04-13", "end_date": "2026-05-12" },
+          { "start_date": "2026-05-18", "end_date": "2026-06-16" },
+          { "start_date": "2026-06-22", "end_date": "2026-07-21" },
+          { "start_date": "2026-07-27", "end_date": "2026-08-25" },
+          { "start_date": "2026-09-07", "end_date": "2026-10-06" },
+          { "start_date": "2026-10-12", "end_date": "2026-11-10" }
+        ]
+      },
+      {
+        "name": "PTE",
+        "label": "Part Time Evening",
+        "sessions": [
+          { "start_date": "2025-01-21", "end_date": "2025-02-25" },
+          { "start_date": "2025-05-01", "end_date": "2025-05-22" },
+          { "start_date": "2025-06-30", "end_date": "2025-07-31" },
+          { "start_date": "2025-09-15", "end_date": "2025-10-20" },
+          { "start_date": "2025-10-21", "end_date": "2025-11-20" },
+          { "start_date": "2025-12-01", "end_date": "2026-01-06" },
+          { "start_date": "2026-01-07", "end_date": "2026-02-09" },
+          { "start_date": "2026-02-16", "end_date": "2026-03-19" },
+          { "start_date": "2026-03-23", "end_date": "2026-04-23" },
+          { "start_date": "2026-04-29", "end_date": "2026-06-01" },
+          { "start_date": "2026-06-02", "end_date": "2026-07-02" },
+          { "start_date": "2026-07-13", "end_date": "2026-08-13" },
+          { "start_date": "2026-08-17", "end_date": "2026-09-16" },
+          { "start_date": "2026-09-23", "end_date": "2026-10-26" },
+          { "start_date": "2026-10-27", "end_date": "2026-11-30" }
+        ]
+      },
+      {
+        "name": "PTW",
+        "label": "Part Time Weekend",
+        "sessions": [
+          { "start_date": "2025-02-08", "end_date": "2025-03-09" },
+          { "start_date": "2025-06-28", "end_date": "2025-07-27" },
+          { "start_date": "2025-09-27", "end_date": "2025-10-26" },
+          { "start_date": "2025-11-01", "end_date": "2025-11-30" },
+          { "start_date": "2025-12-13", "end_date": "2026-01-11" },
+          { "start_date": "2026-01-17", "end_date": "2026-02-15" },
+          { "start_date": "2026-02-21", "end_date": "2026-03-22" },
+          { "start_date": "2026-03-28", "end_date": "2026-04-26" },
+          { "start_date": "2026-05-09", "end_date": "2026-06-07" },
+          { "start_date": "2026-06-13", "end_date": "2026-07-12" },
+          { "start_date": "2026-08-01", "end_date": "2026-08-30" },
+          { "start_date": "2026-09-05", "end_date": "2026-10-04" }
+        ]
+      },
+      {
+        "name": "SPANISH",
+        "label": "Spanish (Part Time)",
+        "sessions": [
+          { "start_date": "2025-01-10", "end_date": "2025-01-28" },
+          { "start_date": "2025-03-24", "end_date": "2025-04-10" },
+          { "start_date": "2025-06-13", "end_date": "2025-07-03" },
+          { "start_date": "2025-07-07", "end_date": "2025-07-24" },
+          { "start_date": "2025-09-16", "end_date": "2025-10-03" },
+          { "start_date": "2025-10-06", "end_date": "2025-10-23" },
+          { "start_date": "2025-12-15", "end_date": "2026-01-07" },
+          { "start_date": "2026-01-08", "end_date": "2026-01-28" },
+          { "start_date": "2026-03-18", "end_date": "2026-04-07" },
+          { "start_date": "2026-04-08", "end_date": "2026-04-27" },
+          { "start_date": "2026-06-10", "end_date": "2026-06-30" },
+          { "start_date": "2026-07-01", "end_date": "2026-07-23" }
+        ]
+      }
+    ]
+  }
+  
 
 
 def detect_language(user_query, history):
@@ -583,12 +720,12 @@ Use ONLY these specific files for accurate information:
 - **new_york_enrollment_guidelines_2025.txt** - For detailed NY enrollment interview guidelines
 - **New_York_Catalog_pricing_only_sept_3.txt** - For NY pricing information
 - **New_York_Catalog_updated_eight.txt** - For comprehensive NY program information
-- **new_york_course_schedule_2025.txt** - For NY course schedules (Makeup, Esthetics, Nails, Waxing)
-- **NY_makeup_modules_2025.txt** - For NY makeup module dates and information
+- **{course_schedule_new_york}t** - For NY course schedules (Makeup, Esthetics, Nails, Waxing)
+- **{course_schedule_for_new_york_makeup}** - For NY makeup module dates and information
 
 **NEW JERSEY Campus Files (Programs: Skincare, Cosmetology, Manicure, Teacher Training, Barbering):**
-- **New Jersey Catalog_updated_nine.txt** - For NJ pricing and program information
-- **nj_course_schedule_2025_FULL.txt** - For NJ course schedules (Skincare, Cosmetology, Manicure, Teacher Training, Barbering)
+- **{pricing_for_new_jersey}** - For NJ pricing and program information
+- **{course_schedule_for_new_jersey}** - For NJ course schedules (Skincare, Cosmetology, Manicure, Teacher Training, Barbering)
 - **cv_enrollment_packet_NJ.txt** - For NJ enrollment information
 
 **CRITICAL SCHEDULE DATA HANDLING - MANDATORY ENFORCEMENT:**
@@ -665,7 +802,7 @@ DO NOT ask for this information again."""
   - Clarify whether they mean:
     1. The standalone Makeup Program (Basic & Advanced Makeup, 70 hours)
     2. The Makeup module within Esthetics (2-week clinic)
-  - If they mean the module: filter dates from NY_makeup_modules_2025.txt
+  - If they mean the module: filter dates from **{course_schedule_for_new_york_makeup}**
   - If they mean the standalone program: return data from {course_schedule_new_york}
 - If a course is listed as "Spanish" and the user has not explicitly requested Spanish, provide the English-language alternative instead
 
@@ -968,8 +1105,8 @@ def get_system_prompt_for_request(history=None, user_query="", rag_context=""):
 
 # NOTE: Hardcoded course schedule removed - system should rely on RAG context
 # from authorized data sources for current and accurate schedule information:
-# - new_york_course_schedule_2025.txt for NY programs (Makeup, Esthetics, Nails, Waxing)
-# - nj_course_schedule_2025_FULL.txt for NJ programs (Skincare, Cosmetology, Manicure, Teacher Training, Barbering)
+# - {{course_schedule_new_york}} for NY programs (Makeup, Esthetics, Nails, Waxing)
+# - {{course_schedule_for_new_jersey}} for NJ programs (Skincare, Cosmetology, Manicure, Teacher Training, Barbering)
 # This ensures all programs for each campus are properly covered
 
 # Backward compatibility

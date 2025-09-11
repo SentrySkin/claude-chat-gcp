@@ -30,7 +30,7 @@ RAG_REGION = os.environ.get("RAG_REGION", "us-central1")
 MODEL = os.environ.get("MODEL", "claude-3-7-sonnet@20250219")  # Using stable, fast model
 CORPUS_RESOURCE = os.environ.get(
     "RAG_CORPUS",
-    "projects/christinevalmy/locations/us-central1/ragCorpora/8070450532247928832"
+    "projects/christinevalmy/locations/us-central1/ragCorpora/5685794529555251200"#8070450532247928832
 )
 
 # Optimized for better context + speed balance
@@ -42,9 +42,18 @@ RAG_SNIPPET_LENGTH = 2500  # Shorter snippets for faster processing
 # ---------------- Init ----------------
 init(project=PROJECT_ID, location=REGION)
 anthropic_client = AnthropicVertex(region=REGION, project_id=PROJECT_ID)
+# anthropic_client = get_client(region=REGION, project_id=PROJECT_ID)
+
+# def get_client(region=REGION, project_id=PROJECT_ID):
+#     # call all models health-check
+#     # return the active model
+#     try:
+#         return AnthropicVertex(region=REGION, project_id=PROJECT_ID)
+#     except:
+#         pass
 
 vertex_init(project=PROJECT_ID, location="us-central1")
-flash_model = GenerativeModel("gemini-2.0-flash-001")
+flash_model = GenerativeModel("claude-3-7-sonnet@20250219")
 
 logging_client = cloud_logging.Client()
 logger = logging_client.logger("claude-conversations")
@@ -200,7 +209,8 @@ def smart_retrieve_from_rag(query_text: str, conversation_stage: str = "active")
 # --------- Optimized History Management ----------------
 def build_optimized_history(raw_history, base_prompt: str, conversation_stage: str = "active"):
     """
-    Smart history management based on conversation stage
+    Smart history management based on conversation stage (Claude-only version).
+    Uses Claude for summarization instead of Gemini.
     """
     if conversation_stage == "completion":
         # Minimal history for completion
@@ -214,58 +224,65 @@ def build_optimized_history(raw_history, base_prompt: str, conversation_stage: s
 
     # Only summarize if we have significant older history
     if conversation_stage != "completion" and older and len(older) > 3:
-        if USE_SUMMARIZER:
-            try:
-                # Smarter conversation filtering for summarization
-                key_exchanges = []
-                for m in older:
-                    if m.get("content"):
-                        text = m['content'][0]['text']
-                        # Prioritize enrollment-relevant content
-                        if any(keyword in text.lower() for keyword in [
-                            'esthetic', 'nail', 'wax', 'makeup', 'program', 'course',
-                            'new york', 'new jersey', 'ny', 'nj', 
-                            'full time', 'part time', 'evening', 'weekend',
-                            'price', 'cost', 'tuition', 'financial aid',
-                            'name', 'email', 'phone', 'contact', '@', 'enrollment'
-                        ]):
-                            key_exchanges.append(f"{m['role']}: {text[:300]}")  # Limit length
+        try:
+            # Smarter conversation filtering for summarization
+            key_exchanges = []
+            for m in older:
+                if m.get("content"):
+                    text = m['content'][0]['text']
+                    # Prioritize enrollment-relevant content
+                    if any(keyword in text.lower() for keyword in [
+                        'esthetic', 'nail', 'wax', 'makeup', 'program', 'course',
+                        'new york', 'new jersey', 'ny', 'nj', 
+                        'full time', 'part time', 'evening', 'weekend',
+                        'price', 'cost', 'tuition', 'financial aid',
+                        'name', 'email', 'phone', 'contact', '@', 'enrollment'
+                    ]):
+                        key_exchanges.append(f"{m['role']}: {text[:300]}")  # Limit length
+            
+            if key_exchanges:
+                convo_text = "\n".join(key_exchanges[-6:])  # Last 6 relevant exchanges
+                prompt = f"""
+                Summarize key enrollment details in 2 sentences:
+                - Program interest and location
+                - Contact info status
                 
-                if key_exchanges:
-                    # Limit summarization input for speed
-                    convo_text = "\n".join(key_exchanges[-6:])  # Last 6 relevant exchanges
-                    prompt = f"""
-                    Summarize key enrollment details in 2 sentences:
-                    - Program interest and location
-                    - Contact info status
-                    
-                    Conversation:
-                    {convo_text}
-                    """
-                    resp = flash_model.generate_content([prompt])
-                    summary_text = resp.candidates[0].content.parts[0].text.strip()
-                    messages.append({
-                        "role": "user",
-                        "content": [{"type": "text", "text": f"Context: {summary_text}"}]
-                    })
-            except Exception as e:
-                logger.log_struct({"event": "flash_summary_error", "detail": str(e)}, severity="WARNING")
-                # Fast fallback: key terms only
-                key_terms = set()
-                for m in older[-5:]:  # Only check last 5 for speed
-                    if m.get("content"):
-                        text = m['content'][0]['text'].lower()
-                        if 'esthetic' in text: key_terms.add('esthetics')
-                        if 'nail' in text: key_terms.add('nails')
-                        if 'new york' in text or 'ny' in text: key_terms.add('NY campus')
-                        if 'new jersey' in text or 'nj' in text: key_terms.add('NJ campus')
-                        if '@' in text: key_terms.add('email provided')
-                
-                if key_terms:
-                    messages.append({
-                        "role": "user",
-                        "content": [{"type": "text", "text": f"Context: {', '.join(key_terms)}"}]
-                    })
+                Conversation:
+                {convo_text}
+                """
+
+                # ✅ Claude call instead of Gemini
+                resp = anthropic_client.messages.create(
+                    model=MODEL,  # e.g. "claude-3-7-sonnet@20250219"
+                    system="You are a helpful assistant that summarizes conversations.",
+                    messages=[{"role": "user", "content": [{"type": "text", "text": prompt}]}],
+                    max_tokens=200,
+                    temperature=0.1
+                )
+                summary_text = resp.content[0].text.strip()
+
+                messages.append({
+                    "role": "user",
+                    "content": [{"type": "text", "text": f"Context: {summary_text}"}]
+                })
+        except Exception as e:
+            logger.log_struct({"event": "claude_summary_error", "detail": str(e)}, severity="WARNING")
+            # Fallback: include simple key terms
+            key_terms = set()
+            for m in older[-5:]:  # Only check last 5 for speed
+                if m.get("content"):
+                    text = m['content'][0]['text'].lower()
+                    if 'esthetic' in text: key_terms.add('esthetics')
+                    if 'nail' in text: key_terms.add('nails')
+                    if 'new york' in text or 'ny' in text: key_terms.add('NY campus')
+                    if 'new jersey' in text or 'nj' in text: key_terms.add('NJ campus')
+                    if '@' in text: key_terms.add('email provided')
+            
+            if key_terms:
+                messages.append({
+                    "role": "user",
+                    "content": [{"type": "text", "text": f"Context: {', '.join(key_terms)}"}]
+                })
 
     # Add recent conversation turns
     for m in recent:
@@ -324,7 +341,7 @@ def get_optimized_claude_params(conversation_stage, user_query_length):
     Dynamic Claude parameters based on conversation state and query complexity
     """
     base_params = {
-        "temperature": 0.3,
+        "temperature": 0.2,
         "top_p": 0.8
     }
     
