@@ -472,6 +472,80 @@ course_schedule_for_new_york_makeup={
     ]
   }
   
+pricing_for_new_york={
+  "location": "New York",
+  "year": 2025,
+  "programs": [
+    {
+      "category": "Esthetics (Hybrid)",
+      "hours": 600,
+      "total_cost": "$10,990",
+      "breakdown": {
+        "registration_fee": "$100",
+        "technology_fee": "$150",
+        "educational_material": "$350",
+        "kits_supplies": "$500",
+        "tuition": "$9,890"
+      }
+    },
+    {
+      "category": "Nails Specialty (Hybrid)",
+      "hours": 250,
+      "total_cost": "$3,125",
+      "breakdown": {
+        "registration_fee": "$100",
+        "technology_fee": "$75",
+        "educational_material": "$200",
+        "kits_supplies": "$350",
+        "tuition": "$2,400"
+      }
+    },
+    {
+      "category": "CIDESCO Beauty Therapy RPL",
+      "hours": 75,
+      "total_cost": "$2,775",
+      "breakdown": {
+        "registration_fee": "$100",
+        "technology_fee": "$75",
+        "kits": "$100",
+        "tuition": ["$2,500", "$2,700"]
+      }
+    },
+    {
+      "category": "Waxing (In-Person)",
+      "hours": 75,
+      "total_cost": "$1,600",
+      "breakdown": {
+        "registration_fee": "$100",
+        "educational_material": "$200",
+        "tuition": "$1,300"
+      }
+    },
+    {
+      "category": "Nails Specialty (Hybrid) + Waxing (In-Person)",
+      "hours": 325,
+      "total_cost": "$4,625",
+      "breakdown": {
+        "registration_fee": "$100",
+        "technology_fee": "$75",
+        "educational_material": "$400",
+        "kits_supplies": "$350",
+        "tuition": "$3,700"
+      }
+    },
+    {
+      "category": "Basic & Advanced Makeup (In-Person)",
+      "hours": 70,
+      "total_cost": "$1,600",
+      "breakdown": {
+        "registration_fee": "$100",
+        "educational_material": "$200",
+        "kits_supplies": "$150",
+        "tuition": "$1,200"
+      }
+    }
+  ]
+}
 
 
 def detect_language(user_query, history):
@@ -916,12 +990,13 @@ Every conversation must end with either:
 2. **DETERMINE LOCATION**: Map program to correct campus (NY or NJ)
 3. **FILTER RAG CONTENT**: IGNORE all RAG content from wrong campus
 4. **VALIDATE SOURCES**: Only use campus-specific files for that program
-5. **CROSS-REFERENCE**: Use matching JSON schedule data (course_schedule_new_york OR course_schedule_for_new_jersey)
+5. **CROSS-REFERENCE**: Use matching JSON schedule data (course_schedule_new_york OR course_schedule_for_new_jersey or course_schedule_for_new_york_makeup)
 
 **EXAMPLES OF MANDATORY FILTERING:**
-- User asks "Barbering schedule" → IGNORE any NY RAG content → ONLY use NJ sources + course_schedule_for_new_jersey
-- User asks "Esthetics pricing" → IGNORE any NJ RAG content → ONLY use NY sources + course_schedule_new_york
-- User asks "Skin care programs" → IGNORE any NY RAG content → ONLY use NJ sources + course_schedule_for_new_jersey
+- User asks "Barbering schedule" → IGNORE any NY RAG content → ONLY use NJ sources + {course_schedule_for_new_jersey}
+- User asks "Esthetics pricing" → IGNORE any NJ RAG content → ONLY use NY sources + {course_schedule_new_york}
+-User asks "makeup schedule" → IGNORE any NJ RAG content → ONLY use NY sources + {course_schedule_for_new_york_makeup}
+- User asks "Skin care programs" → IGNORE any NY RAG content → ONLY use NJ sources + {course_schedule_for_new_jersey}
 
 **AUTHORIZED DATA SOURCES FOR RAG SEARCH:**
 Use ONLY these specific files for accurate information:
@@ -929,9 +1004,9 @@ Use ONLY these specific files for accurate information:
 **NEW YORK Campus Files (Programs: Makeup, Esthetics, Nails, Waxing):**
 - **enrollment_requirements_2025_for_NY.txt** - For NY admission requirements and enrollment process
 - **new_york_enrollment_guidelines_2025.txt** - For detailed NY enrollment interview guidelines
-- **New_York_Catalog_pricing_only_sept_3.txt** - For NY pricing information
+- **{pricing_for_new_york}.txt** - For NY pricing information
 - **New_York_Catalog_updated_eight.txt** - For comprehensive NY program information
-- **{course_schedule_new_york}t** - For NY course schedules (Makeup, Esthetics, Nails, Waxing)
+- **{course_schedule_new_york}** - For NY course schedules (Esthetics, Nails, Waxing)
 - **{course_schedule_for_new_york_makeup}** - For NY makeup module dates and information
 
 **NEW JERSEY Campus Files (Programs: Skincare, Cosmetology, Manicure, Teacher Training, Barbering):**
@@ -1002,7 +1077,8 @@ DO NOT ask for this information again."""
 - **NO RAG DATA**: If RAG context lacks future dates, reply: "Let me get current schedule information for you"
 - **VALIDATION FAILURE**: If no valid future dates found, reply: "No upcoming dates available, please contact our Enrollment Advisor"
 - **DATA SOURCES**: 
-  - NY programs (Makeup, Esthetics, Nails, Waxing): {course_schedule_new_york}
+  - NY programs (Esthetics, Nails, Waxing): {course_schedule_new_york}
+  -NY programs (Makeup): {course_schedule_for_new_york_makeup}
   - NJ programs (Skincare, Cosmetology, Manicure, Teacher Training, Barbering): {course_schedule_for_new_jersey}
   - Barbering: ONLY available at New Jersey campus
 
@@ -1051,13 +1127,13 @@ DO NOT ask for this information again."""
 
 **MAKEUP PROGRAM CLARIFICATION:**
 - Each Esthetics student automatically completes a 2-week Makeup module (clinic)
-- For module start/end dates, refer to NY_makeup_modules_2025.txt
+- For makeup module start/end dates, refer to **{course_schedule_for_new_york_makeup}**
 - If the user asks about "Makeup":
   - **FIRST: Check if they mean attendance makeup hours (redirect to enrollment advisor)**
   - **THEN: Clarify whether they mean:**
     1. The standalone Makeup Program (Basic & Advanced Makeup, 70 hours)
     2. The Makeup module within Esthetics (2-week clinic)
-  - If they mean the module: filter dates from **{course_schedule_for_new_york_makeup}**
+  - If they mean the makeup module: filter dates from **{course_schedule_for_new_york_makeup}**
   - If they mean the standalone program: return data from {course_schedule_new_york}
 
 **EXAMPLES OF POTENTIAL CONFUSION:**
@@ -1076,7 +1152,7 @@ DO NOT ask for this information again."""
 
 **PROGRAM–CATALOG MAPPING (MANDATORY):**
 - **New York Campus Programs**: Makeup, Esthetics, Nails, Waxing  
-  → Pricing source: `New_York_Catalog_pricing_only_sept_3.txt`
+  → Pricing source: {pricing_for_new_york}
   - If user asks about a specific NY program (e.g., “NY makeup pricing”), always use `New_York_Catalog_pricing_only_sept_3.txt`.
 - **New Jersey Campus Programs**: Skincare, Cosmetology, Manicure, Teacher Training, Barbering  
   → Pricing source: {{pricing_for_new_jersey}}
@@ -1086,7 +1162,7 @@ DO NOT ask for this information again."""
 **CRITICAL ANTI-HALLUCINATION RULES:**
 🚫 **ABSOLUTE BLOCKING RULES** - NEVER VIOLATE THESE:
 1. **Skincare, Cosmetology, Manicure, Teacher Training, Barbering** = NJ ONLY → ONLY use {pricing_for_new_jersey}
-2. **Makeup, Esthetics, Nails, Waxing** = NY ONLY → ONLY use `New_York_Catalog_pricing_only_sept_3.txt`
+2. **Makeup, Esthetics, Nails, Waxing** = NY ONLY → ONLY use {pricing_for_new_york}
 3. **NEVER** provide NY pricing for NJ-only programs (Skincare, Cosmetology, Manicure, Teacher Training, Barbering)
 4. **NEVER** provide NJ pricing for NY-only programs (Makeup, Esthetics, Nails, Waxing)
 
@@ -1099,7 +1175,7 @@ DO NOT ask for this information again."""
 
 **ERROR PREVENTION:**
 - If user says "NJ skincare" → ONLY search {pricing_for_new_jersey}
-- If user says "NY esthetics" → ONLY search `New_York_Catalog_pricing_only_sept_3.txt`  
+- If user says "NY esthetics" → ONLY search {pricing_for_new_york}
 - If RAG returns wrong campus data → IGNORE and request correct information
 
 **🔒 CONTACT POLICY - MANDATORY ENFORCEMENT:**
