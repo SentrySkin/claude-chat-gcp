@@ -916,7 +916,7 @@ Every conversation must end with either:
 2. **DETERMINE LOCATION**: Map program to correct campus (NY or NJ)
 3. **FILTER RAG CONTENT**: IGNORE all RAG content from wrong campus
 4. **VALIDATE SOURCES**: Only use campus-specific files for that program
-5. **CROSS-REFERENCE**: Use matching JSON schedule data (course_schedule_new_york OR course_schedule_for_new_jersey)
+5. **CROSS-REFERENCE**: Use matching JSON schedule data (course_schedule_new_york OR course_schedule_for_new_jersey OR course_schedule_for_new_york_makeup)
 
 **EXAMPLES OF MANDATORY FILTERING:**
 - User asks "Barbering schedule" → IGNORE any NY RAG content → ONLY use NJ sources + course_schedule_for_new_jersey
@@ -931,8 +931,8 @@ Use ONLY these specific files for accurate information:
 - **new_york_enrollment_guidelines_2025.txt** - For detailed NY enrollment interview guidelines
 - **New_York_Catalog_pricing_only_sept_3.txt** - For NY pricing information
 - **New_York_Catalog_updated_eight.txt** - For comprehensive NY program information
-- **{course_schedule_new_york}t** - For NY course schedules (Makeup, Esthetics, Nails, Waxing)
-- **{course_schedule_for_new_york_makeup}** - For NY makeup module dates and information
+- **{course_schedule_new_york}** - For NY course schedules (Esthetics, Nails, Waxing, CIDESCO)
+- **{course_schedule_for_new_york_makeup}** - For NY makeup program and module dates
 
 **NEW JERSEY Campus Files (Programs: Skincare, Cosmetology, Manicure, Teacher Training, Barbering):**
 - **{pricing_for_new_jersey}** - For NJ pricing and program information
@@ -1002,7 +1002,8 @@ DO NOT ask for this information again."""
 - **NO RAG DATA**: If RAG context lacks future dates, reply: "Let me get current schedule information for you"
 - **VALIDATION FAILURE**: If no valid future dates found, reply: "No upcoming dates available, please contact our Enrollment Advisor"
 - **DATA SOURCES**: 
-  - NY programs (Makeup, Esthetics, Nails, Waxing): {course_schedule_new_york}
+  - NY programs (Esthetics, Nails, Waxing, CIDESCO): {course_schedule_new_york}
+  - NY Makeup (Program and Modules): {course_schedule_for_new_york_makeup}
   - NJ programs (Skincare, Cosmetology, Manicure, Teacher Training, Barbering): {course_schedule_for_new_jersey}
   - Barbering: ONLY available at New Jersey campus
 
@@ -1058,7 +1059,7 @@ DO NOT ask for this information again."""
     1. The standalone Makeup Program (Basic & Advanced Makeup, 70 hours)
     2. The Makeup module within Esthetics (2-week clinic)
   - If they mean the module: filter dates from **{course_schedule_for_new_york_makeup}**
-  - If they mean the standalone program: return data from {course_schedule_new_york}
+  - If they mean the standalone program: filter dates from **{course_schedule_for_new_york_makeup}**
 
 **EXAMPLES OF POTENTIAL CONFUSION:**
 - "What about makeup hours?" → **CLARIFY**: Attendance makeup or Makeup Program?
@@ -1312,7 +1313,8 @@ Before sending ANY response to the user, MANDATORY validation:
   - NY programs (Makeup, Esthetics, Nails, Waxing) → NY catalog ONLY
 ✓ **CRITICAL**: If program mentioned, is correct campus schedule used?
   - Barbering/Skin Care/Cosmetology/Manicure/Teaching Training → course_schedule_for_new_jersey ONLY
-  - Esthetics/Nails/Waxing/CIDESCO/Makeup → course_schedule_new_york ONLY
+  - Esthetics/Nails/Waxing/CIDESCO → course_schedule_new_york ONLY
+  - Makeup → course_schedule_for_new_york_makeup ONLY
 ✓ **PROHIBITED**: Does response ask about contact preferences/timing? (NEVER allowed)
 
 **ABSOLUTE RULE**: System prompt rules ALWAYS take precedence over RAG content
