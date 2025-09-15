@@ -751,7 +751,7 @@ Response template:
 
 [Ask for missing information one by one, referencing previous conversation context]
 
-Una vez que tengamos toda la información, nuestro asesor se pondrá en contacto contigo pronto para programar una visita al campus y responder todas tus preguntas."
+Una vez que tengamos toda la información, nuestro asesor se pondrá en contacto contigo pronto para programar una visita al campus y responder todas tus preguntas.\n\nNota importante: Sophia puede causar información errónea, el asesor de inscripción verificará cuando hable contigo."
 """
         elif missing_info and enrollment_attempts >= 5:
             return f"""
@@ -759,7 +759,7 @@ Una vez que tengamos toda la información, nuestro asesor se pondrá en contacto
 Maximum attempts reached. Transition to contact request.
 
 Response template:
-"Entiendo que puede ser difícil proporcionar toda la información ahora. No te preocupes, nuestro asesor de inscripción se pondrá en contacto contigo pronto para ayudarte con el proceso de inscripción. ¡Esperamos darte la bienvenida a la familia Christine Valmy!"
+"Entiendo que puede ser difícil proporcionar toda la información ahora. No te preocupes, nuestro asesor de inscripción se pondrá en contacto contigo pronto para ayudarte con el proceso de inscripción. ¡Esperamos darte la bienvenida a la familia Christine Valmy!\n\nNota importante: Sophia puede causar información errónea, el asesor de inscripción verificará cuando hable contigo."
 """
         else:
             return f"""
@@ -767,7 +767,7 @@ Response template:
 All information collected! User is ready for enrollment advisor contact.
 
 Response template:
-"¡Perfecto! Tengo toda tu información. Nuestro asesor de inscripción se pondrá en contacto contigo pronto para programar una visita al campus y discutir tu programa de interés. ¡Esperamos darte la bienvenida a la familia Christine Valmy!"
+"¡Perfecto! Tengo toda tu información. Nuestro asesor de inscripción se pondrá en contacto contigo pronto para programar una visita al campus y discutir tu programa de interés. ¡Esperamos darte la bienvenida a la familia Christine Valmy!\n\nNota importante: Sophia puede causar información errónea, el asesor de inscripción verificará cuando hable contigo."
 
 **CHAT ENDING:**
 After this message, the conversation ends. Do NOT ask any more questions. Do NOT continue the conversation.
@@ -785,7 +785,7 @@ Response template:
 
 [Ask for missing information one by one, referencing previous conversation context]
 
-Once we have all the information, our enrollment advisor will contact you soon to schedule a campus tour and answer all your questions."
+Once we have all the information, our enrollment advisor will contact you soon to schedule a campus tour and answer all your questions.\n\nImportant note: Sophia may cause mis-information, the enrollment advisor will verify when they speak with you!"
 """
         elif missing_info and enrollment_attempts >= 5:
             return f"""
@@ -793,7 +793,7 @@ Once we have all the information, our enrollment advisor will contact you soon t
 Maximum attempts reached. Transition to contact request.
 
 Response template:
-"I understand it can be difficult to provide all the information right now. Don't worry, our enrollment advisor will contact you soon to help you with the enrollment process. We look forward to welcoming you to the Christine Valmy family!"
+"I understand it can be difficult to provide all the information right now. Don't worry, our enrollment advisor will contact you soon to help you with the enrollment process. We look forward to welcoming you to the Christine Valmy family!\n\nImportant note: Sophia may cause mis-information, the enrollment advisor will verify when they speak with you!"
 """
         else:
             return f"""
@@ -801,7 +801,7 @@ Response template:
 All information collected! User is ready for enrollment advisor contact.
 
 Response template:
-"Perfect! I have all your information. Our enrollment advisor will contact you soon to schedule a campus tour and discuss your program of interest. We look forward to welcoming you to the Christine Valmy family!"
+"Perfect! I have all your information. Our enrollment advisor will contact you soon to schedule a campus tour and discuss your program of interest. We look forward to welcoming you to the Christine Valmy family!\n\nImportant note: Sophia may cause mis-information, the enrollment advisor will verify when they speak with you!"
 
 **CHAT ENDING:**
 After this message, the conversation ends. Do NOT ask any more questions. Do NOT continue the conversation.
@@ -1029,10 +1029,10 @@ DO NOT ask for this information again."""
 ✅ **REQUIRED FORMAT**: "Course runs [Days] [Time], from [Start Date] to [End Date]"
 
 **CORRECT EXAMPLES:**
-- "Course runs Monday-Thursday 8am-6pm, from September 16th to June 23rd"
-- "Classes are Tuesday and Wednesday 9am-4pm, from October 11th to July 19th"
-- "Schedule is Monday, Wednesday, Friday 6pm-10pm, from November 3rd to May 4th"
-- "Full-time program runs Monday-Friday 9am-5pm, from December 1st to April 10th"
+- "Course runs Monday-Thursday 8am-6pm, from September 16th 2025 to June 23rd 2026"
+- "Classes are Tuesday and Wednesday 9am-4pm, from October 11th 2025 to July 19th 2026"
+- "Schedule is Monday, Wednesday, Friday 6pm-10pm, from November 3rd 2025 to May 4th 2026"
+- "Full-time program runs Monday-Friday 9am-5pm, from December 1st 2025 to April 10th 2026"
 
 **WRONG EXAMPLES:**
 ❌ "Course starts September 16th Tuesday"
@@ -1042,11 +1042,11 @@ DO NOT ask for this information again."""
 **MANDATORY COMPONENTS TO INCLUDE:**
 1. **Days of the week** the course runs (Mon-Thu, Tuesday/Wednesday, etc.)
 2. **Time schedule** (8am-6pm, 9am-4pm, 6pm-10pm, etc.)
-3. **Start date** (month and day only)
-4. **End date** (month and day only)
+3. **Start date** (month, day, and year)
+4. **End date** (month, day, and year)
 5. **"From [date] to [date]"** format
 
-**ABSOLUTE RULE**: Always provide complete schedule information, never just start dates with weekdays.
+**ABSOLUTE RULE**: Always provide complete schedule information with years included, never just start dates with weekdays.
 
 **🎨 MAKEUP CLARIFICATION GUARDRAIL - MANDATORY ENFORCEMENT:**
 ⚠️ **CRITICAL: DISTINGUISH BETWEEN MAKE UP HOURS vs MAKEUP MODULES** ⚠️
@@ -1163,9 +1163,9 @@ DO NOT ask for this information again."""
     # Stage-specific instructions
     if stage == "completion":
         if detected_language == "spanish":
-            completion_msg = "¡Perfecto! Gracias por tu interés en Christine Valmy International School. Nuestro asesor de inscripción se pondrá en contacto contigo pronto. ¡Esperamos darte la bienvenida a la familia Christine Valmy!"
+            completion_msg = "¡Perfecto! Gracias por tu interés en Christine Valmy International School. Nuestro asesor de inscripción se pondrá en contacto contigo pronto. ¡Esperamos darte la bienvenida a la familia Christine Valmy!\n\nNota importante: Sophia puede causar información errónea, el asesor de inscripción verificará cuando hable contigo."
         else:
-            completion_msg = "Perfect! Thank you for your interest in Christine Valmy International School. Our enrollment advisor will reach out to you soon. We look forward to welcoming you to the Christine Valmy family!"
+            completion_msg = "Perfect! Thank you for your interest in Christine Valmy International School. Our enrollment advisor will reach out to you soon. We look forward to welcoming you to the Christine Valmy family!\n\nImportant note: Sophia may cause mis-information, the enrollment advisor will verify when they speak with you!"
             
         base_prompt += f"""
 
@@ -1193,7 +1193,7 @@ You have: {name}, {email}, {phone}
 - Email: {email}
 - Phone: {phone}
 
-Is all this information correct? If yes, our enrollment advisor will contact you soon to discuss your program of interest and schedule a campus tour."
+Is all this information correct? If yes, our enrollment advisor will contact you soon to discuss your program of interest and schedule a campus tour.\n\nImportant note: Sophia may cause mis-information, the enrollment advisor will verify when they speak with you!"
 
 **CRITICAL**: Do NOT ask about contact preferences, timing, or methods. Simply confirm info and end.
 Then watch for completion signals."""
@@ -1375,7 +1375,7 @@ Then collect:
 - Phone number (Número de teléfono)
 
 Once all three are provided, confirm the details and end with:
-"¡Perfecto! Nuestro asesor de inscripción se pondrá en contacto contigo dentro de 24 horas para discutir tu programa y responder todas tus preguntas. ¡Esperamos darte la bienvenida a la familia Christine Valmy!"
+"¡Perfecto! Nuestro asesor de inscripción se pondrá en contacto contigo dentro de 24 horas para discutir tu programa y responder todas tus preguntas. ¡Esperamos darte la bienvenida a la familia Christine Valmy!\n\nNota importante: Sophia puede causar información errónea, el asesor de inscripción verificará cuando hable contigo."
 """
     else:
         return """
@@ -1389,7 +1389,7 @@ Then collect:
 - Phone number
 
 Once all three are provided, confirm the details and end with:
-"Perfect! Our enrollment advisor will contact you soon to discuss your program and answer all your questions. We look forward to welcoming you to the Christine Valmy family!"
+"Perfect! Our enrollment advisor will contact you soon to discuss your program and answer all your questions. We look forward to welcoming you to the Christine Valmy family!\n\nImportant note: Sophia may cause mis-information, the enrollment advisor will verify when they speak with you!"
 """
     
 # Export for Flask integration
