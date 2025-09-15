@@ -335,142 +335,77 @@ pricing_for_new_jersey={
     }
   ]
 }
-course_schedule_for_new_york_makeup={
-    "location": "New York",
-    "module": "MAKEUP/CLINIC",
-    "program_groups": [
-      {
-        "name": "FTD",
-        "label": "Full Time Day",
-        "sessions": [
-          { "start_date": "2025-02-10", "end_date": "2025-02-24" },
-          { "start_date": "2025-02-27", "end_date": "2025-03-12" },
-          { "start_date": "2025-03-13", "end_date": "2025-03-26" },
-          { "start_date": "2025-04-10", "end_date": "2025-04-23" },
-          { "start_date": "2025-04-24", "end_date": "2025-05-07" },
-          { "start_date": "2025-05-12", "end_date": "2025-05-23" },
-          { "start_date": "2025-05-26", "end_date": "2025-06-06" },
-          { "start_date": "2025-06-13", "end_date": "2025-06-26" },
-          { "start_date": "2025-06-27", "end_date": "2025-07-10" },
-          { "start_date": "2025-07-15", "end_date": "2025-07-28" },
-          { "start_date": "2025-07-29", "end_date": "2025-08-11" },
-          { "start_date": "2025-08-18", "end_date": "2025-08-29" },
-          { "start_date": "2025-09-01", "end_date": "2025-09-12" },
-          { "start_date": "2025-09-16", "end_date": "2025-09-29" },
-          { "start_date": "2025-09-30", "end_date": "2025-10-13" },
-          { "start_date": "2025-10-16", "end_date": "2025-10-29" },
-          { "start_date": "2025-10-30", "end_date": "2025-11-12" },
-          { "start_date": "2025-11-17", "end_date": "2025-12-02" },
-          { "start_date": "2025-12-03", "end_date": "2025-12-16" },
-          { "start_date": "2025-12-18", "end_date": "2026-01-06" },
-          { "start_date": "2026-01-07", "end_date": "2026-01-21" },
-          { "start_date": "2026-01-26", "end_date": "2026-02-06" },
-          { "start_date": "2026-02-09", "end_date": "2026-02-23" },
-          { "start_date": "2026-02-27", "end_date": "2026-03-12" },
-          { "start_date": "2026-03-13", "end_date": "2026-03-27" },
-          { "start_date": "2026-04-10", "end_date": "2026-04-23" },
-          { "start_date": "2026-04-24", "end_date": "2026-05-07" }
-        ]
-      },
-      {
-        "name": "WTF",
-        "label": "Wednesday Thursday Friday",
-        "sessions": [
-          { "start_date": "2025-09-10", "end_date": "2025-10-10" },
-          { "start_date": "2025-10-15", "end_date": "2025-11-13" },
-          { "start_date": "2025-11-26", "end_date": "2026-01-02" },
-          { "start_date": "2026-01-07", "end_date": "2026-02-05" },
-          { "start_date": "2026-02-20", "end_date": "2026-03-26" },
-          { "start_date": "2026-03-27", "end_date": "2026-04-29" },
-          { "start_date": "2026-05-06", "end_date": "2026-06-04" },
-          { "start_date": "2026-06-05", "end_date": "2026-07-10" },
-          { "start_date": "2026-07-22", "end_date": "2026-08-20" },
-          { "start_date": "2026-08-21", "end_date": "2026-09-23" },
-          { "start_date": "2026-10-02", "end_date": "2026-11-04" },
-          { "start_date": "2026-11-05", "end_date": "2026-12-10" }
-        ]
-      },
-      {
-        "name": "MT",
-        "label": "Monday Tuesday",
-        "sessions": [
-          { "start_date": "2025-02-18", "end_date": "2025-03-24" },
-          { "start_date": "2025-04-07", "end_date": "2025-05-13" },
-          { "start_date": "2025-05-19", "end_date": "2025-06-24" },
-          { "start_date": "2025-06-30", "end_date": "2025-08-05" },
-          { "start_date": "2025-09-02", "end_date": "2025-10-06" },
-          { "start_date": "2025-10-07", "end_date": "2025-11-10" },
-          { "start_date": "2025-11-18", "end_date": "2025-12-22" },
-          { "start_date": "2025-12-23", "end_date": "2026-01-26" },
-          { "start_date": "2026-02-02", "end_date": "2026-03-09" },
-          { "start_date": "2026-03-10", "end_date": "2026-04-13" },
-          { "start_date": "2026-04-13", "end_date": "2026-05-12" },
-          { "start_date": "2026-05-18", "end_date": "2026-06-16" },
-          { "start_date": "2026-06-22", "end_date": "2026-07-21" },
-          { "start_date": "2026-07-27", "end_date": "2026-08-25" },
-          { "start_date": "2026-09-07", "end_date": "2026-10-06" },
-          { "start_date": "2026-10-12", "end_date": "2026-11-10" }
-        ]
-      },
-      {
-        "name": "PTE",
-        "label": "Part Time Evening",
-        "sessions": [
-          { "start_date": "2025-01-21", "end_date": "2025-02-25" },
-          { "start_date": "2025-05-01", "end_date": "2025-05-22" },
-          { "start_date": "2025-06-30", "end_date": "2025-07-31" },
-          { "start_date": "2025-09-15", "end_date": "2025-10-20" },
-          { "start_date": "2025-10-21", "end_date": "2025-11-20" },
-          { "start_date": "2025-12-01", "end_date": "2026-01-06" },
-          { "start_date": "2026-01-07", "end_date": "2026-02-09" },
-          { "start_date": "2026-02-16", "end_date": "2026-03-19" },
-          { "start_date": "2026-03-23", "end_date": "2026-04-23" },
-          { "start_date": "2026-04-29", "end_date": "2026-06-01" },
-          { "start_date": "2026-06-02", "end_date": "2026-07-02" },
-          { "start_date": "2026-07-13", "end_date": "2026-08-13" },
-          { "start_date": "2026-08-17", "end_date": "2026-09-16" },
-          { "start_date": "2026-09-23", "end_date": "2026-10-26" },
-          { "start_date": "2026-10-27", "end_date": "2026-11-30" }
-        ]
-      },
-      {
-        "name": "PTW",
-        "label": "Part Time Weekend",
-        "sessions": [
-          { "start_date": "2025-02-08", "end_date": "2025-03-09" },
-          { "start_date": "2025-06-28", "end_date": "2025-07-27" },
-          { "start_date": "2025-09-27", "end_date": "2025-10-26" },
-          { "start_date": "2025-11-01", "end_date": "2025-11-30" },
-          { "start_date": "2025-12-13", "end_date": "2026-01-11" },
-          { "start_date": "2026-01-17", "end_date": "2026-02-15" },
-          { "start_date": "2026-02-21", "end_date": "2026-03-22" },
-          { "start_date": "2026-03-28", "end_date": "2026-04-26" },
-          { "start_date": "2026-05-09", "end_date": "2026-06-07" },
-          { "start_date": "2026-06-13", "end_date": "2026-07-12" },
-          { "start_date": "2026-08-01", "end_date": "2026-08-30" },
-          { "start_date": "2026-09-05", "end_date": "2026-10-04" }
-        ]
-      },
-      {
-        "name": "SPANISH",
-        "label": "Spanish (Part Time)",
-        "sessions": [
-          { "start_date": "2025-01-10", "end_date": "2025-01-28" },
-          { "start_date": "2025-03-24", "end_date": "2025-04-10" },
-          { "start_date": "2025-06-13", "end_date": "2025-07-03" },
-          { "start_date": "2025-07-07", "end_date": "2025-07-24" },
-          { "start_date": "2025-09-16", "end_date": "2025-10-03" },
-          { "start_date": "2025-10-06", "end_date": "2025-10-23" },
-          { "start_date": "2025-12-15", "end_date": "2026-01-07" },
-          { "start_date": "2026-01-08", "end_date": "2026-01-28" },
-          { "start_date": "2026-03-18", "end_date": "2026-04-07" },
-          { "start_date": "2026-04-08", "end_date": "2026-04-27" },
-          { "start_date": "2026-06-10", "end_date": "2026-06-30" },
-          { "start_date": "2026-07-01", "end_date": "2026-07-23" }
-        ]
-      }
+course_schedule_for_new_york_makeup ={
+    "year": 2025,
+    "months": [
+        {
+            "name": "September",
+            "categories": {
+                "Makeup/Clinic": {
+                    "English": [
+                        { "program": "Makeup Full Time Day", "label": "FTD", "start_date": "2025-09-01", "end_date": "2025-09-12", "weekday": "Day" },
+                        { "program": "Makeup Full Time Day", "label": "FTD", "start_date": "2025-09-16", "end_date": "2025-09-29", "weekday": "Day" },
+                        { "program": "Makeup Full Time Day", "label": "FTD", "start_date": "2025-09-30", "end_date": "2025-10-13", "weekday": "Day" },
+                        { "program": "Makeup Monday Tuesday", "label": "MT", "start_date": "2025-09-02", "end_date": "2025-10-06", "weekday": "Monday" },
+                        { "program": "Makeup Part Time Evening", "label": "PTE", "start_date": "2025-09-15", "end_date": "2025-10-20", "weekday": "Evening" },
+                        { "program": "Makeup Part Time Weekend", "label": "PTW", "start_date": "2025-09-27", "end_date": "2025-10-26", "weekday": "Weekend" }
+                    ],
+                    "Spanish": [
+                        { "program": "Makeup Part Time (Spanish)", "label": "SPANISH", "start_date": "2025-09-16", "end_date": "2025-10-03", "weekday": "Part Time" }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "October",
+            "categories": {
+                "Makeup/Clinic": {
+                    "English": [
+                        { "program": "Makeup Full Time Day", "label": "FTD", "start_date": "2025-10-16", "end_date": "2025-10-29", "weekday": "Day" },
+                        { "program": "Makeup Full Time Day", "label": "FTD", "start_date": "2025-10-30", "end_date": "2025-11-12", "weekday": "Day" },
+                        { "program": "Makeup Monday Tuesday", "label": "MT", "start_date": "2025-10-07", "end_date": "2025-11-10", "weekday": "Monday" },
+                        { "program": "Makeup Wednesday Thursday Friday", "label": "WTF", "start_date": "2025-10-15", "end_date": "2025-11-13", "weekday": "Wednesday" }
+                    ],
+                    "Spanish": [
+                        { "program": "Makeup Part Time (Spanish)", "label": "SPANISH", "start_date": "2025-10-06", "end_date": "2025-10-23", "weekday": "Part Time" }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "November",
+            "categories": {
+                "Makeup/Clinic": {
+                    "English": [
+                        { "program": "Makeup Full Time Day", "label": "FTD", "start_date": "2025-11-17", "end_date": "2025-12-02", "weekday": "Day" },
+                        { "program": "Makeup Monday Tuesday", "label": "MT", "start_date": "2025-11-18", "end_date": "2025-12-22", "weekday": "Monday" },
+                        { "program": "Makeup Wednesday Thursday Friday", "label": "WTF", "start_date": "2025-11-26", "end_date": "2026-01-02", "weekday": "Wednesday" },
+                        { "program": "Makeup Part Time Weekend", "label": "PTW", "start_date": "2025-11-01", "end_date": "2025-11-30", "weekday": "Weekend" }
+                    ],
+                    "Spanish": []
+                }
+            }
+        },
+        {
+            "name": "December",
+            "categories": {
+                "Makeup/Clinic": {
+                    "English": [
+                        { "program": "Makeup Full Time Day", "label": "FTD", "start_date": "2025-12-03", "end_date": "2025-12-16", "weekday": "Day" },
+                        { "program": "Makeup Full Time Day", "label": "FTD", "start_date": "2025-12-18", "end_date": "2026-01-06", "weekday": "Day" },
+                        { "program": "Makeup Monday Tuesday", "label": "MT", "start_date": "2025-12-23", "end_date": "2026-01-26", "weekday": "Monday" },
+                        { "program": "Makeup Part Time Evening", "label": "PTE", "start_date": "2025-12-01", "end_date": "2026-01-06", "weekday": "Evening" },
+                        { "program": "Makeup Part Time Weekend", "label": "PTW", "start_date": "2025-12-13", "end_date": "2026-01-11", "weekday": "Weekend" }
+                    ],
+                    "Spanish": [
+                        { "program": "Makeup Part Time (Spanish)", "label": "SPANISH", "start_date": "2025-12-15", "end_date": "2026-01-07", "weekday": "Part Time" }
+                    ]
+                }
+            }
+        }
     ]
-  }
+}
+
   
 pricing_for_new_york={
   "location": "New York",
