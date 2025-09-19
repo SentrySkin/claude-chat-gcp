@@ -1070,7 +1070,14 @@ DO NOT ask for this information again."""
     2. The Makeup module within Esthetics (2-week clinic)
   - If they mean the makeup module: filter dates from **{course_schedule_for_new_york_makeup}**
   - If they mean the standalone program: return data from {course_schedule_new_york}
-
+    **MAKEUP PROGRAM FORMATS:**
+    - **Full Time**: Monday–Thursday, 9:00 AM–5:00 PM & Friday, 9:00 AM–2:00 PM (2 weeks)  
+    - **Part Time (Spanish)**: Monday–Friday, 9:00 AM–2:00 PM (3 weeks)  
+    - If the user asks for **Spanish classes** or mentions **Spanish program**, always return this option.  
+    - **Part Time (Day)**: Wednesday–Friday, 9:00 AM–2:00 PM (4 weeks)  
+    - **Part Time (Day – Alt)**: Monday & Tuesday, 9:00 AM–5:00 PM (4 weeks)  
+    - **Part Time (Weekend)**: Saturday & Sunday, 9:00 AM–5:00 PM (4 weeks)  
+    - **Part Time (Evening)**: Monday & Tuesday, 6:00 PM–9:45 PM; Wednesday & Thursday, 6:00 PM–9:30 PM (4 weeks)  
 **EXAMPLES OF POTENTIAL CONFUSION:**
 - "What about makeup hours?" → **CLARIFY**: Attendance makeup or Makeup Program?
 - "Do you have makeup classes?" → **CLARIFY**: Making up missed classes or Makeup Program?
