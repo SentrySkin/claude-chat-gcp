@@ -661,6 +661,7 @@ def detect_payment_inquiry(user_query):
     all_keywords = payment_keywords_en + payment_keywords_es
     return any(keyword in user_query_lower for keyword in all_keywords)
 
+
 def is_first_interaction(history):
     """
     Check if this is the user's first interaction
@@ -1159,6 +1160,9 @@ DO NOT ask for this information again."""
 - **RAG DEPENDENCY**: ALWAYS reference RAG context when available - never guess dates
 - Ask for location ONLY ONCE - check conversation history first
 - Payment options: Only discuss if user specifically asks about payment plans
+- **CRITICAL PAYMENT CLARIFICATION**: If asked about payment options, specify that Christine Valmy offers **weekly payment plans only** (no monthly payments)
+- **NO DISCOUNT POLICY**: If asked about discounts, clarify that there are **no discounts for full payments** - all students pay the same tuition regardless of payment method
+- **VETERANS AFFAIRS**: If asked about VA benefits or scholarships, clarify that Veterans Affairs is **not a scholarship** and is available **only for the Waxing program**
 - Use authorized data sources for all program, pricing, and schedule information
 
 **LOCATIONS & PROGRAMS:**
@@ -1215,7 +1219,11 @@ Use RAG context from authorized pricing files for accurate pricing information, 
         base_prompt += """
 
 **PAYMENT OPTIONS STAGE:**
-Use RAG context for pricing, explain that payment options are personalized, and collect contact information."""
+**CRITICAL: ONLY WEEKLY PAYMENTS AVAILABLE**
+- Christine Valmy offers **weekly payment plans only** (no monthly payments)
+- **NO DISCOUNTS**: If asked about discounts, clarify that there are no discounts for full payments - all students pay the same tuition regardless of payment method
+- Our enrollment advisors can discuss personalized weekly payment arrangements based on your program choice and schedule
+- Use RAG context for pricing information, then collect contact information"""
     
     elif stage == "enrollment_collection":
         base_prompt += get_enrollment_collection_prompt(detected_language, name, email, phone, location_confirmed, history)
@@ -1302,6 +1310,9 @@ Use RAG context from authorized catalog files for program information, discover 
 - Time off questions: "85% attendance requirement. Connect with enrollment advisor for policies."
 - Housing: "No housing but great transit access"
 - Payment plans: Only discuss **if** user specifically asks about payment options
+- **WEEKLY PAYMENTS ONLY**: If asked about payment options, clarify that Christine Valmy offers **weekly payment plans only** (no monthly payments)
+- **NO DISCOUNTS**: If asked about discounts, clarify that there are **no discounts for full payments** - all students pay the same tuition
+- **VETERANS AFFAIRS**: If asked about VA benefits or scholarships, clarify that Veterans Affairs is **not a scholarship** and is available **only for the Waxing program**
 - Completion signals: "nope", "no", "sounds good", "that's correct", "no", "nada", "perfecto"
 - **RAG VALIDATION**: Always use provided RAG context for accurate, current information - NEVER show dates without RAG verification
 - **DATE ENFORCEMENT**: Only suggest FUTURE course start dates after **{today}** - ignore past/current courses from RAG context
