@@ -40,6 +40,7 @@ PROGRAM_LOCATION_MAP = {
     "cosmo": ["new_jersey"],
     "hair": ["new_jersey"],
     "hairstyling": ["new_jersey"],
+    "waxing": ["new_jersey"],
     
     # Programs available at both locations (none currently)
     # "program_name": ["new_york", "new_jersey"]
