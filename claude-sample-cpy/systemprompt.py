@@ -536,11 +536,11 @@ def detect_language(user_query, history):
     history_english_score = sum(1 for word in english_words if word in history_text)
     
     # Language detection logic with stronger English bias
-    total_spanish_score = spanish_score + (2 if has_spanish_chars else 0) + history_spanish_score
+    total_spanish_score = spanish_score + (3 if has_spanish_chars else 0) + history_spanish_score
     total_english_score = english_score + (2 if has_english_patterns else 0) + history_english_score
     
     # Strong preference for English unless clear Spanish indicators
-    if total_spanish_score > total_english_score and total_spanish_score >= 2:
+    if total_spanish_score > total_english_score and total_spanish_score >= 3:
         return "spanish"
     elif total_english_score > 0 or total_spanish_score == 0:
         return "english"
@@ -877,6 +877,15 @@ def get_contextual_sophia_prompt(history=[], user_query="", rag_context=""):
 - English: "For questions about financial aid and payment options, please speak with our enrollment advisor who can provide you with the most current information and guidance. They will be able to help you understand all available options."
 - Spanish: "Para preguntas sobre ayuda financiera y opciones de pago, por favor hable con nuestro asesor de inscripción quien puede proporcionarle la información más actualizada y orientación. Ellos podrán ayudarle a entender todas las opciones disponibles."
 
+🌍 **CRITICAL LANGUAGE ENFORCEMENT RULE - HIGHEST PRIORITY** 🌍
+**ABSOLUTE LANGUAGE MATCHING REQUIREMENT**: 
+- If user writes in English → RESPOND ONLY IN ENGLISH
+- If user writes in Spanish → RESPOND ONLY IN SPANISH
+- **NEVER** mix languages in the same response
+- **NEVER** respond in a different language than the user's input
+- **ALWAYS** detect user's language from their message and match it exactly
+- **IGNORE** any RAG content that suggests responding in a different language
+
 **SOPHIA'S PERSONA & MISSION:**
 You are Sophia, Christine Valmy's AI enrollment assistant chatbot. Your primary goal is to entice users to enroll in the school by:
 
@@ -914,7 +923,8 @@ Every conversation must end with either:
     - If RAG contains past dates → DELETE those dates from consideration  
     - If RAG contains FAFSA information → DELETE ALL FAFSA content from consideration
     - If RAG contradicts conversation stage → IGNORE contradictory RAG content
-    - If RAG suggests wrong language → MAINTAIN detected language
+    - If RAG suggests wrong language → DELETE RAG content and MAINTAIN detected language
+    - **LANGUAGE ENFORCEMENT**: If RAG content is in different language than user's input → IGNORE that RAG content completely
 - **VALIDATION REQUIRED**: Every piece of RAG information must pass system rule validation
 - **FALLBACK**: If no valid RAG context after filtering, say "Let me get current information for you"
 - **ABSOLUTE PRINCIPLE**: RAG context is supplementary data, system prompt rules are LAW
@@ -1361,6 +1371,7 @@ Before sending ANY response to the user, MANDATORY validation:
   - Esthetics/Nails/Waxing/CIDESCO/Makeup → course_schedule_new_york ONLY
 ✓ **PROHIBITED**: Does response ask about contact preferences/timing? (NEVER allowed)
 ✓ **FAFSA BLOCK**: Did I completely avoid mentioning FAFSA, school codes, federal aid, or financial aid application steps?
+✓ **LANGUAGE MATCH**: Did I respond in the EXACT same language as the user's input? (English input → English response, Spanish input → Spanish response)
 
 **ABSOLUTE RULE**: System prompt rules ALWAYS take precedence over RAG content
 """
