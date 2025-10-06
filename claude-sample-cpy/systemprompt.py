@@ -1857,20 +1857,23 @@ def extract_contact_info(history):
     phone_match = re.search(r'\b\d{3}[-.]?\d{3}[-.]?\d{4}\b', conversation_text)
     phone = phone_match.group() if phone_match else None
     
-    # Extract name (basic pattern)
-    name = None
+    # Extract first name and last name separately
+    first_name = None
+    last_name = None
     for msg in history:
         if msg.get("content"):
             text = msg['content'][0]['text']
-            if "@" in text and phone and len(text.split()) <= 5:
-                # Look for name in same message as contact info
+            if "@" in text and phone and len(text.split()) <= 6:
+                # Look for names in same message as contact info
                 words = text.replace(email or "", "").replace(phone or "", "").split()
-                for word in words:
-                    if word.replace(",", "").isalpha() and len(word) > 1:
-                        name = word.replace(",", "")
-                        break
+                name_words = [word.replace(",", "") for word in words if word.replace(",", "").isalpha() and len(word) > 1]
+                if len(name_words) >= 2:
+                    first_name = name_words[0]
+                    last_name = name_words[1]
+                elif len(name_words) == 1:
+                    first_name = name_words[0]
     
-    return name, email, phone
+    return first_name, last_name, email, phone
 
 def detect_pricing_inquiry(user_query):
     """
@@ -1957,17 +1960,19 @@ def detect_enrollment_info_collected(history):
     """
     Detect if enrollment information has been collected
     """
-    name, email, phone = extract_contact_info(history)
-    return bool(name and email and phone)
+    first_name, last_name, email, phone = extract_contact_info(history)
+    return bool(first_name and last_name and email and phone)
 
-def get_enrollment_collection_prompt(detected_language, name, email, phone, location_confirmed, history):
+def get_enrollment_collection_prompt(detected_language, first_name, last_name, email, phone, location_confirmed, history):
     """
     Get the enrollment collection prompt based on what information is missing
     """
     missing_info = []
     
-    if not name:
-        missing_info.append("full name")
+    if not first_name:
+        missing_info.append("first name")
+    if not last_name:
+        missing_info.append("last name")
     if not email:
         missing_info.append("email address")
     if not phone:
@@ -2062,7 +2067,7 @@ def get_contextual_sophia_prompt(history=[], user_query="", rag_context=""):
     """
     
     has_contact_info, completion_signal, enrollment_shared = detect_enrollment_completion_state(history, user_query)
-    name, email, phone = extract_contact_info(history)
+    first_name, last_name, email, phone = extract_contact_info(history)
     detected_language = detect_language(user_query, history)
     location_confirmed = check_location_confirmed(history)
     pricing_inquiry = detect_pricing_inquiry(user_query)
@@ -2244,9 +2249,10 @@ Use ONLY these specific files for accurate information:
 
 **CONTACT INFO:**"""
     
-    if name or email or phone:
+    if first_name or last_name or email or phone:
         base_prompt += f"""
-- Name: {name or 'Not provided'}
+- First Name: {first_name or 'Not provided'}
+- Last Name: {last_name or 'Not provided'}
 - Email: {email or 'Not provided'}  
 - Phone: {phone or 'Not provided'}
 DO NOT ask for this information again."""
@@ -2402,12 +2408,13 @@ DO NOT ask for this information again."""
 🚫 **NEVER give direct contact information**
 
 ✅ **ALWAYS collect user information instead:**
-- Full name
+- First name
+- Last name
 - Email address  
 - Phone number
 
 **REQUIRED RESPONSE WHEN USER ASKS FOR CONTACT INFO:**
-"We will contact you regarding your questions. Please provide us with your name, email and phone number. A representative from the school will reach out soon."
+"We will contact you regarding your questions. Please provide us with your first name, last name, email and phone number. A representative from the school will reach out soon."
 
 **EXAMPLES OF CONTACT REQUESTS TO HANDLE THIS WAY:**
 - "What's your phone number?"
@@ -2498,12 +2505,13 @@ Use RAG context from authorized pricing files for accurate pricing information, 
 - Use RAG context for pricing information, then collect contact information"""
     
     elif stage == "enrollment_collection":
-        base_prompt += get_enrollment_collection_prompt(detected_language, name, email, phone, location_confirmed, history)
+        base_prompt += get_enrollment_collection_prompt(detected_language, first_name, last_name, email, phone, location_confirmed, history)
         base_prompt += f"""
 
 **CRITICAL ENROLLMENT COLLECTION OVERRIDE:**
 IGNORE any instructions in the template that say "one by one" - you MUST ask for ALL missing contact information in a SINGLE response:
-- Full name
+- First name
+- Last name
 - Email address  
 - Phone number
 - Campus preference (if not confirmed)
@@ -2555,7 +2563,7 @@ Use RAG context from authorized catalog files for program information, discover 
 ⚠️ SYSTEM RULES ALWAYS SUPERSEDE RAG CONTEXT ⚠️
 
 **VALIDATION CHECKLIST - APPLY BEFORE EVERY RESPONSE:**
-1. **CONTACT POLICY**: If user asks for school contact info → NEVER provide phone/email of school, ALWAYS collect user's contact, phone number, email, full name to have enrollment advisor reach out to them.
+1. **CONTACT POLICY**: If user asks for school contact info → NEVER provide phone/email of school, ALWAYS collect user's contact, phone number, email, first name, last name to have enrollment advisor reach out to them.
 2. **MAKEUP CLARIFICATION**: If user mentions "makeup hours" or "make up hours" → CLARIFY if they mean attendance makeup (redirect to advisor) vs Makeup Program
 3. **SCHEDULE FORMAT**: If sharing course schedules → Use complete format "Course runs [Days] [Time], from [Start Date] to [End Date]" NOT "starts [date] [weekday]"
 4. **LOCATION FILTERING**: If program detected (e.g., Barbering) → IGNORE all RAG content from wrong campus (IGNORE NY content for Barbering)
@@ -2660,28 +2668,30 @@ def get_enrollment_contact_prompt(detected_language):
         return """
 **ENROLLMENT CONTACT REQUEST:**
 When user asks for contact information or when information is not available, respond with:
-"Nos pondremos en contacto contigo sobre tus preguntas. Por favor, proporciona tu nombre, email y número de teléfono. Un representante de la escuela se comunicará contigo pronto."
+"Nos pondremos en contacto contigo sobre tus preguntas. Por favor, proporciona tu nombre, apellido, email y número de teléfono. Un representante de la escuela se comunicará contigo pronto."
 
 Then collect:
-- Full name (Nombre completo)
+- First name (Nombre)
+- Last name (Apellido)
 - Email address (Correo electrónico)
 - Phone number (Número de teléfono)
 
-Once all three are provided, confirm the details and end with:
+Once all four are provided, confirm the details and end with:
 "¡Perfecto! Nuestro asesor de inscripción se pondrá en contacto contigo dentro de 24 horas para discutir tu programa y responder todas tus preguntas. ¡Esperamos darte la bienvenida a la familia Christine Valmy!\n\nNota importante: Sophia puede causar información errónea, el asesor de inscripción verificará cuando hable contigo."
 """
     else:
         return """
 **ENROLLMENT CONTACT REQUEST:**
 When user asks for contact information or when information is not available, respond with:
-"We will contact you regarding your questions. Please provide us with your name, email and phone number. A representative from the school will reach out soon."
+"We will contact you regarding your questions. Please provide us with your first name, last name, email and phone number. A representative from the school will reach out soon."
 
 Then collect:
-- Full name
+- First name
+- Last name
 - Email address  
 - Phone number
 
-Once all three are provided, confirm the details and end with:
+Once all four are provided, confirm the details and end with:
 "Perfect! Our enrollment advisor will contact you soon to discuss your program and answer all your questions. We look forward to welcoming you to the Christine Valmy family!\n\nImportant note: Sophia may cause mis-information, the enrollment advisor will verify when they speak with you!"
 """
     
