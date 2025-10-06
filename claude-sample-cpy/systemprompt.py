@@ -168,17 +168,7 @@ course_schedule_new_york = {
 course_schedule_for_new_jersey = {
     "year": 2025,
     "months": [
-        {
-            "name": "September",
-            "categories": {
-                "Teaching Training": {
-                    "English": [
-                        { "program": "Teaching Training Part Time Evening", "start_date": "2025-09-08", "end_date": "2026-09-09", "weekday": "Monday" }
-                    ],
-                    "Spanish": []
-                }
-            }
-        },
+        
         {
             "name": "October",
             "categories": {
@@ -281,8 +271,1264 @@ course_schedule_for_new_jersey = {
                 }
             }
         }
+        
     ]
+},{"year": 2026,
+  "months": [
+    {
+      "name": "January",
+      "categories": {
+        "Skin Care": {
+          "English": [
+            {
+              "program": "Skin Care Full Time Day (FTD - E)","start_date": "2026-01-05","end_date": "2026-05-06", "weekday": "Monday","seats": 22
+            },
+            {
+              "program": "Skin Care Part Time Day (PTD - E)","start_date": "2026-01-05", "end_date": "2026-07-16", "weekday": "Monday", "seats": 22
+            },
+            {
+              "program": "Skin Care Part Time Evening (PTE - E)","start_date": "2026-01-05", "end_date": "2026-09-28", "weekday": "Monday", "seats": 12
+            }
+          ],
+          "Spanish": [
+            {
+              "program": "Skin Care Part Time Evening (PTE - SPA)","start_date": "2026-01-05","end_date": "2026-09-28","weekday": "Monday", "seats": 12
+            }
+          ]
+        },
+        "Cosmetology": {
+          "English": [
+            {
+              "program": "Cosmetology Full Time Day (FTD - E)",
+              "start_date": "2026-01-05",
+              "end_date": "2026-09-09",
+              "weekday": "Monday",
+              "seats": 22
+            },
+            {
+              "program": "Cosmetology Part Time Evening (PTE - E)",
+              "start_date": "2026-01-05",
+              "end_date": "2027-07-06",
+              "weekday": "Monday",
+              "seats": 12
+            }
+          ],
+          "Spanish": [
+            {
+              "program": "Cosmetology Part Time Evening (PTE - SPA)",
+              "start_date": "2026-01-05",
+              "end_date": "2027-07-06",
+              "weekday": "Monday",
+              "seats": 12
+            }
+          ]
+        },
+        "Manicure": {
+          "English": [
+            {
+              "program": "Manicure Full Time (Mon–Thu, FT - E)",
+              "start_date": "2026-01-05",
+              "end_date": "2026-03-23",
+              "weekday": "Monday",
+              "seats": 14
+            }
+          ],
+          "Spanish": []
+        },
+        "Barbering": {
+          "English": [
+            {
+              "program": "Barbering Full Time Day (FTD - E)",
+              "start_date": "2026-01-05",
+              "end_date": "2026-07-09",
+              "weekday": "Monday",
+              "seats": 15
+            },
+            {
+              "program": "Barbering Part Time Day (PTD - E)",
+              "start_date": "2026-01-05",
+              "end_date": "2027-10-26",
+              "weekday": "Monday",
+              "seats": 15
+            }
+          ],
+          "Spanish": []
+        },
+        "Teaching Training": {
+          "English": [
+            {
+              "program": "Teaching Training Full Time Day (FTD - E)",
+              "start_date": "2026-01-05",
+              "end_date": "2026-05-06",
+              "weekday": "Monday"
+            },
+            {
+              "program": "Teaching Training Part Time Day (PTD - E)",
+              "start_date": "2026-01-05",
+              "end_date": "2026-07-28",
+              "weekday": "Monday"
+            },
+            {
+              "program": "Teaching Training Part Time Evening (PTE - E)",
+              "start_date": "2026-01-05",
+              "end_date": "2027-01-05",
+              "weekday": "Monday"
+            }
+          ],
+          "Spanish": []
+        }
+      }
+    },
+    {
+      "name": "February",
+      "categories": {
+        "Skin Care": {
+          "English": [
+            {
+              "program": "Skin Care Full Time Day (FTD - E)",
+              "start_date": "2026-02-02",
+              "end_date": "2026-06-03",
+              "weekday": "Monday",
+              "seats": 22
+            },
+            {
+              "program": "Skin Care Part Time Evening (PTE - E)",
+              "start_date": "2026-02-02",
+              "end_date": "2026-10-26",
+              "weekday": "Monday",
+              "seats": 12
+            }
+          ],
+          "Spanish": []
+        },
+        "Cosmetology": {
+          "English": [],
+          "Spanish": []
+        },
+        "Manicure": {
+          "English": [],
+          "Spanish": [
+            {
+              "program": "Manicure Part Time Evening (PTE - SPA)",
+              "start_date": "2026-02-02",
+              "end_date": "2026-06-15",
+              "weekday": "Monday",
+              "seats": 14
+            }
+          ]
+        },
+        "Barbering": {
+          "English": [
+            {
+              "program": "Barbering Full Time Day (FTD - E)",
+              "start_date": "2026-02-02",
+              "end_date": "2026-08-08",
+              "weekday": "Monday",
+              "seats": 15
+            },
+            {
+              "program": "Barbering Part Time Day (PTD - E)",
+              "start_date": "2026-02-02",
+              "end_date": "2026-11-13",
+              "weekday": "Monday"
+            }
+          ],
+          "Spanish": []
+        },
+        "Teaching Training": {
+          "English": [
+            {
+              "program": "Teaching Training Full Time Day (FTD - E)",
+              "start_date": "2026-02-02",
+              "end_date": "2026-06-03",
+              "weekday": "Monday"
+            },
+            {
+              "program": "Teaching Training Part Time Day (PTD - E)",
+              "start_date": "2026-02-02",
+              "end_date": "2026-08-24",
+              "weekday": "Monday"
+            },
+            {
+              "program": "Teaching Training Part Time Evening (PTE - E)",
+              "start_date": "2026-02-02",
+              "end_date": "2027-02-02",
+              "weekday": "Monday"
+            }
+          ],
+          "Spanish": []
+        }
+      }
+    },
+    {
+      "name": "March",
+      "categories": {
+        "Skin Care": {
+          "English": [
+            {
+              "program": "Skin Care Full Time Day (FTD - E)",
+              "start_date": "2026-03-02",
+              "end_date": "2026-07-01",
+              "weekday": "Monday",
+              "seats": 22
+            },
+            {
+              "program": "Skin Care Part Time Day (PTD - E)",
+              "start_date": "2026-03-02",
+              "end_date": "2026-09-09",
+              "weekday": "Monday",
+              "seats": 22
+            },
+            {
+              "program": "Skin Care Part Time Evening (PTE - E)",
+              "start_date": "2026-03-02",
+              "end_date": "2026-11-19",
+              "weekday": "Monday",
+              "seats": 12
+            }
+          ],
+          "Spanish": [
+            {
+              "program": "Skin Care Part Time Evening (PTE - SPA)",
+              "start_date": "2026-03-02",
+              "end_date": "2026-11-19",
+              "weekday": "Monday",
+              "seats": 12
+            }
+          ]
+        },
+        "Cosmetology": {
+          "English": [
+            {
+              "program": "Cosmetology Full Time Day (FTD - E)",
+              "start_date": "2026-03-02",
+              "end_date": "2026-11-02",
+              "weekday": "Monday",
+              "seats": 22
+            }
+          ],
+          "Spanish": []
+        },
+        "Manicure": {
+          "English": [],
+          "Spanish": []
+        },
+        "Barbering": {
+          "English": [
+            {
+              "program": "Barbering Full Time Day (FTD - E)",
+              "start_date": "2026-03-02",
+              "end_date": "2026-09-01",
+              "weekday": "Monday",
+              "seats": 15
+            },
+            {
+              "program": "Barbering Part Time Day (PTD - E)",
+              "start_date": "2026-03-02",
+              "end_date": "2026-12-14",
+              "weekday": "Monday"
+            }
+          ],
+          "Spanish": []
+        },
+        "Teaching Training": {
+          "English": [
+            {
+              "program": "Teaching Training Full Time Day (FTD - E)",
+              "start_date": "2026-03-02",
+              "end_date": "2026-07-01",
+              "weekday": "Monday"
+            },
+            {
+              "program": "Teaching Training Part Time Day (PTD - E)",
+              "start_date": "2026-03-02",
+              "end_date": "2026-09-21",
+              "weekday": "Monday"
+            },
+            {
+              "program": "Teaching Training Part Time Evening (PTE - E)",
+              "start_date": "2026-03-02",
+              "end_date": "2027-03-02",
+              "weekday": "Monday"
+            }
+          ],
+          "Spanish": []
+        }
+      }
+    },{
+  "name": "April",
+  "categories": {
+    "Skin Care": {
+      "English": [
+        {
+          "program": "Skin Care Full Time Day (FTD - E)",
+          "start_date": "2026-04-06",
+          "end_date": "2026-08-06",
+          "weekday": "Monday",
+          "seats": 22
+        },
+        {
+          "program": "Skin Care Part Time Evening (PTE - E)",
+          "start_date": "2026-04-06",
+          "end_date": "2027-01-06",
+          "weekday": "Monday",
+          "seats": 12
+        }
+      ],
+      "Spanish": []
+    },
+    "Cosmetology": {
+      "English": [],
+      "Spanish": []
+    },
+    "Manicure": {
+      "English": [
+        {
+          "program": "Manicure Full Time (Mon–Thu, FT - E)",
+          "start_date": "2026-04-06",
+          "end_date": "2026-06-18",
+          "weekday": "Monday",
+          "seats": 14
+        }
+      ],
+      "Spanish": []
+    },
+    "Barbering": {
+      "English": [
+        {
+          "program": "Barbering Full Time Day (FTD - E)",
+          "start_date": "2026-04-06",
+          "end_date": "2026-10-07",
+          "weekday": "Monday",
+          "seats": 15
+        },
+        {
+          "program": "Barbering Part Time Day (PTD - E)",
+          "start_date": "2026-04-06",
+          "end_date": "2027-01-27",
+          "weekday": "Monday"
+        }
+      ],
+      "Spanish": []
+    },
+    "Teaching Training": {
+      "English": [
+        {
+          "program": "Teaching Training Full Time Day (FTD - E)",
+          "start_date": "2026-04-06",
+          "end_date": "2026-08-06",
+          "weekday": "Monday"
+        },
+        {
+          "program": "Teaching Training Part Time Day (PTD - E)",
+          "start_date": "2026-04-06",
+          "end_date": "2026-10-26",
+          "weekday": "Monday"
+        },
+        {
+          "program": "Teaching Training Part Time Evening (PTE - E)",
+          "start_date": "2026-04-06",
+          "end_date": "2027-04-06",
+          "weekday": "Monday"
+        }
+      ],
+      "Spanish": []
+    }
+  }
+},{
+  "name": "May",
+  "categories": {
+    "Skin Care": {
+      "English": [
+        {
+          "program": "Skin Care Full Time Day (FTD - E)",
+          "start_date": "2026-05-04",
+          "end_date": "2026-09-03",
+          "weekday": "Monday",
+          "seats": 22
+        },
+        {
+          "program": "Skin Care Part Time Day (PTD - E)",
+          "start_date": "2026-05-04",
+          "end_date": "2026-11-11",
+          "weekday": "Monday",
+          "seats": 22
+        },
+        {
+          "program": "Skin Care Part Time Evening (PTE - E)",
+          "start_date": "2026-05-04",
+          "end_date": "2027-02-04",
+          "weekday": "Monday",
+          "seats": 12
+        }
+      ],
+      "Spanish": [
+        {
+          "program": "Skin Care Part Time Evening (PTE - SPA)",
+          "start_date": "2026-05-04",
+          "end_date": "2027-02-04",
+          "weekday": "Monday",
+          "seats": 12
+        }
+      ]
+    },
+    "Cosmetology": {
+      "English": [
+        {
+          "program": "Cosmetology Full Time Day (FTD - E)",
+          "start_date": "2026-05-04",
+          "end_date": "2027-01-14",
+          "weekday": "Monday",
+          "seats": 22
+        },
+        {
+          "program": "Cosmetology Part Time Evening (PTE - E)",
+          "start_date": "2026-05-04",
+          "end_date": "",
+          "weekday": "Monday",
+          "seats": 12
+        }
+      ],
+      "Spanish": []
+    },
+    "Manicure": {
+      "English": [],
+      "Spanish": []
+    },
+    "Barbering": {
+      "English": [
+        {
+          "program": "Barbering Full Time Day (FTD - E)",
+          "start_date": "2026-05-04",
+          "end_date": "2026-11-04",
+          "weekday": "Monday",
+          "seats": 15
+        },
+        {
+          "program": "Barbering Part Time Day (PTD - E)",
+          "start_date": "2026-05-04",
+          "end_date": "2027-02-25",
+          "weekday": "Monday"
+        }
+      ],
+      "Spanish": []
+    },
+    "Teaching Training": {
+      "English": [
+        {
+          "program": "Teaching Training Full Time Day (FTD - E)",
+          "start_date": "2026-05-04",
+          "end_date": "2026-09-03",
+          "weekday": "Monday"
+        },
+        {
+          "program": "Teaching Training Part Time Day (PTD - E)",
+          "start_date": "2026-05-04",
+          "end_date": "2026-11-23",
+          "weekday": "Monday"
+        },
+        {
+          "program": "Teaching Training Part Time Evening (PTE - E)",
+          "start_date": "2026-05-04",
+          "end_date": "2027-05-04",
+          "weekday": "Monday"
+        }
+      ],
+      "Spanish": []
+    }
+  }
+},{
+  "name": "May",
+  "categories": {
+    "Skin Care": {
+      "English": [
+        {
+          "program": "Skin Care Full Time Day (FTD - E)",
+          "start_date": "2026-05-04",
+          "end_date": "2026-09-03",
+          "weekday": "Monday",
+          "seats": 22
+        },
+        {
+          "program": "Skin Care Part Time Day (PTD - E)",
+          "start_date": "2026-05-04",
+          "end_date": "2026-11-11",
+          "weekday": "Monday",
+          "seats": 22
+        },
+        {
+          "program": "Skin Care Part Time Evening (PTE - E)",
+          "start_date": "2026-05-04",
+          "end_date": "2027-02-04",
+          "weekday": "Monday",
+          "seats": 12
+        }
+      ],
+      "Spanish": [
+        {
+          "program": "Skin Care Part Time Evening (PTE - SPA)",
+          "start_date": "2026-05-04",
+          "end_date": "2027-02-04",
+          "weekday": "Monday",
+          "seats": 12
+        }
+      ]
+    },
+    "Cosmetology": {
+      "English": [
+        {
+          "program": "Cosmetology Full Time Day (FTD - E)",
+          "start_date": "2026-05-04",
+          "end_date": "2027-01-14",
+          "weekday": "Monday",
+          "seats": 22
+        },
+        {
+          "program": "Cosmetology Part Time Evening (PTE - E)",
+          "start_date": "2026-05-04",
+          "end_date": "",
+          "weekday": "Monday",
+          "seats": 12
+        }
+      ],
+      "Spanish": []
+    },
+    "Manicure": {
+      "English": [],
+      "Spanish": []
+    },
+    "Barbering": {
+      "English": [
+        {
+          "program": "Barbering Full Time Day (FTD - E)",
+          "start_date": "2026-05-04",
+          "end_date": "2026-11-04",
+          "weekday": "Monday",
+          "seats": 15
+        },
+        {
+          "program": "Barbering Part Time Day (PTD - E)",
+          "start_date": "2026-05-04",
+          "end_date": "2027-02-25",
+          "weekday": "Monday"
+        }
+      ],
+      "Spanish": []
+    },
+    "Teaching Training": {
+      "English": [
+        {
+          "program": "Teaching Training Full Time Day (FTD - E)",
+          "start_date": "2026-05-04",
+          "end_date": "2026-09-03",
+          "weekday": "Monday"
+        },
+        {
+          "program": "Teaching Training Part Time Day (PTD - E)",
+          "start_date": "2026-05-04",
+          "end_date": "2026-11-23",
+          "weekday": "Monday"
+        },
+        {
+          "program": "Teaching Training Part Time Evening (PTE - E)",
+          "start_date": "2026-05-04",
+          "end_date": "2027-05-04",
+          "weekday": "Monday"
+        }
+      ],
+      "Spanish": []
+    }
+  }
+},{
+  "name": "June",
+  "categories": {
+    "Skin Care": {
+      "English": [
+        {
+          "program": "Skin Care Full Time Day (FTD - E)",
+          "start_date": "2026-06-01",
+          "end_date": "2026-10-01",
+          "weekday": "Monday",
+          "seats": 22
+        },
+        {
+          "program": "Skin Care Part Time Evening (PTE - E)",
+          "start_date": "2026-06-01",
+          "end_date": "2027-03-04",
+          "weekday": "Monday",
+          "seats": 12
+        }
+      ],
+      "Spanish": []
+    },
+    "Cosmetology": {
+      "English": [],
+      "Spanish": []
+    },
+    "Manicure": {
+      "English": [],
+      "Spanish": []
+    },
+    "Barbering": {
+      "English": [
+        {
+          "program": "Barbering Full Time Day (FTD - E)",
+          "start_date": "2026-06-01",
+          "end_date": "2026-12-03",
+          "weekday": "Monday",
+          "seats": 15
+        },
+        {
+          "program": "Barbering Part Time Day (PTD - E)",
+          "start_date": "2026-06-01",
+          "end_date": "2027-03-24",
+          "weekday": "Monday"
+        }
+      ],
+      "Spanish": []
+    },
+    "Teaching Training": {
+      "English": [
+        {
+          "program": "Teaching Training Full Time Day (FTD - E)",
+          "start_date": "2026-06-01",
+          "end_date": "2026-10-01",
+          "weekday": "Monday"
+        },
+        {
+          "program": "Teaching Training Part Time Day (PTD - E)",
+          "start_date": "2026-06-01",
+          "end_date": "2026-12-16",
+          "weekday": "Monday"
+        },
+        {
+          "program": "Teaching Training Part Time Evening (PTE - E)",
+          "start_date": "2026-06-01",
+          "end_date": "2027-06-01",
+          "weekday": "Monday"
+        }
+      ],
+      "Spanish": []
+    }
+  }
+},{
+  "name": "July",
+  "categories": {
+    "Skin Care": {
+      "English": [
+        {
+          "program": "Skin Care Full Time Day (FTD - E)",
+          "start_date": "2026-07-06",
+          "end_date": "2026-11-03",
+          "weekday": "Monday",
+          "seats": 22
+        },
+        {
+          "program": "Skin Care Part Time Day (PTD - E)",
+          "start_date": "2026-07-06",
+          "end_date": "2027-01-21",
+          "weekday": "Monday",
+          "seats": 22
+        },
+        {
+          "program": "Skin Care Part Time Evening (PTE - E)",
+          "start_date": "2026-07-06",
+          "end_date": "2027-04-08",
+          "weekday": "Monday",
+          "seats": 12
+        }
+      ],
+      "Spanish": [
+        {
+          "program": "Skin Care Part Time Evening (PTE - SPA)",
+          "start_date": "2026-07-06",
+          "end_date": "2027-04-08",
+          "weekday": "Monday",
+          "seats": 12
+        }
+      ]
+    },
+    "Cosmetology": {
+      "English": [
+        {
+          "program": "Cosmetology Full Time Day (FTD - E)",
+          "start_date": "2026-07-06",
+          "end_date": "2027-03-17",
+          "weekday": "Monday",
+          "seats": 22
+        }
+      ],
+      "Spanish": [
+        {
+          "program": "Cosmetology Part Time Evening (PTE - SPA)",
+          "start_date": "2026-07-06",
+          "end_date": "2027-12-29",
+          "weekday": "Monday",
+          "seats": 12
+        }
+      ]
+    },
+    "Manicure": {
+      "English": [
+        {
+          "program": "Manicure Full Time (Mon–Thu, FT - E)",
+          "start_date": "2026-07-06",
+          "end_date": "2026-09-17",
+          "weekday": "Monday",
+          "seats": 14
+        }
+      ],
+      "Spanish": [
+        {
+          "program": "Manicure Part Time Evening (PTE - SPA)",
+          "start_date": "2026-07-06",
+          "end_date": "2026-11-12",
+          "weekday": "Monday",
+          "seats": 14
+        }
+      ]
+    },
+    "Barbering": {
+      "English": [
+        {
+          "program": "Barbering Full Time Day (FTD - E)",
+          "start_date": "2026-07-06",
+          "end_date": "2027-01-13",
+          "weekday": "Monday",
+          "seats": 15
+        },
+        {
+          "program": "Barbering Part Time Day (PTD - E)",
+          "start_date": "2026-07-06",
+          "end_date": "2027-04-26",
+          "weekday": "Monday"
+        }
+      ],
+      "Spanish": []
+    },
+    "Teaching Training": {
+      "English": [
+        {
+          "program": "Teaching Training Full Time Day (FTD - E)",
+          "start_date": "2026-07-06",
+          "end_date": "2026-11-03",
+          "weekday": "Monday"
+        },
+        {
+          "program": "Teaching Training Part Time Day (PTD - E)",
+          "start_date": "2026-07-06",
+          "end_date": "2027-02-01",
+          "weekday": "Monday"
+        },
+        {
+          "program": "Teaching Training Part Time Evening (PTE - E)",
+          "start_date": "2026-07-06",
+          "end_date": "2027-07-06",
+          "weekday": "Monday"
+        }
+      ],
+      "Spanish": []
+    }
+  }
+},{
+  "name": "July",
+  "categories": {
+    "Skin Care": {
+      "English": [
+        {
+          "program": "Skin Care Full Time Day (FTD - E)",
+          "start_date": "2026-07-06",
+          "end_date": "2026-11-03",
+          "weekday": "Monday",
+          "seats": 22
+        },
+        {
+          "program": "Skin Care Part Time Day (PTD - E)",
+          "start_date": "2026-07-06",
+          "end_date": "2027-01-21",
+          "weekday": "Monday",
+          "seats": 22
+        },
+        {
+          "program": "Skin Care Part Time Evening (PTE - E)",
+          "start_date": "2026-07-06",
+          "end_date": "2027-04-08",
+          "weekday": "Monday",
+          "seats": 12
+        }
+      ],
+      "Spanish": [
+        {
+          "program": "Skin Care Part Time Evening (PTE - SPA)",
+          "start_date": "2026-07-06",
+          "end_date": "2027-04-08",
+          "weekday": "Monday",
+          "seats": 12
+        }
+      ]
+    },
+    "Cosmetology": {
+      "English": [
+        {
+          "program": "Cosmetology Full Time Day (FTD - E)",
+          "start_date": "2026-07-06",
+          "end_date": "2027-03-17",
+          "weekday": "Monday",
+          "seats": 22
+        }
+      ],
+      "Spanish": [
+        {
+          "program": "Cosmetology Part Time Evening (PTE - SPA)",
+          "start_date": "2026-07-06",
+          "end_date": "2027-12-29",
+          "weekday": "Monday",
+          "seats": 12
+        }
+      ]
+    },
+    "Manicure": {
+      "English": [
+        {
+          "program": "Manicure Full Time (Mon–Thu, FT - E)",
+          "start_date": "2026-07-06",
+          "end_date": "2026-09-17",
+          "weekday": "Monday",
+          "seats": 14
+        }
+      ],
+      "Spanish": [
+        {
+          "program": "Manicure Part Time Evening (PTE - SPA)",
+          "start_date": "2026-07-06",
+          "end_date": "2026-11-12",
+          "weekday": "Monday",
+          "seats": 14
+        }
+      ]
+    },
+    "Barbering": {
+      "English": [
+        {
+          "program": "Barbering Full Time Day (FTD - E)",
+          "start_date": "2026-07-06",
+          "end_date": "2027-01-13",
+          "weekday": "Monday",
+          "seats": 15
+        },
+        {
+          "program": "Barbering Part Time Day (PTD - E)",
+          "start_date": "2026-07-06",
+          "end_date": "2027-04-26",
+          "weekday": "Monday"
+        }
+      ],
+      "Spanish": []
+    },
+    "Teaching Training": {
+      "English": [
+        {
+          "program": "Teaching Training Full Time Day (FTD - E)",
+          "start_date": "2026-07-06",
+          "end_date": "2026-11-03",
+          "weekday": "Monday"
+        },
+        {
+          "program": "Teaching Training Part Time Day (PTD - E)",
+          "start_date": "2026-07-06",
+          "end_date": "2027-02-01",
+          "weekday": "Monday"
+        },
+        {
+          "program": "Teaching Training Part Time Evening (PTE - E)",
+          "start_date": "2026-07-06",
+          "end_date": "2027-07-06",
+          "weekday": "Monday"
+        }
+      ],
+      "Spanish": []
+    }
+  }
+},{
+  "name": "August",
+  "categories": {
+    "Skin Care": {
+      "English": [
+        {
+          "program": "Skin Care Full Time Day (FTD - E)",
+          "start_date": "2026-08-03",
+          "end_date": "2026-12-03",
+          "weekday": "Monday",
+          "seats": 22
+        },
+        {
+          "program": "Skin Care Part Time Evening (PTE - E)",
+          "start_date": "2026-08-03",
+          "end_date": "2027-03-08",
+          "weekday": "Monday",
+          "seats": 12
+        }
+      ],
+      "Spanish": []
+    },
+    "Cosmetology": {
+      "English": [],
+      "Spanish": []
+    },
+    "Manicure": {
+      "English": [],
+      "Spanish": []
+    },
+    "Barbering": {
+      "English": [
+        {
+          "program": "Barbering Full Time Day (FTD - E)",
+          "start_date": "2026-08-03",
+          "end_date": "2027-02-11",
+          "weekday": "Monday",
+          "seats": 15
+        },
+        {
+          "program": "Barbering Part Time Day (PTD - E)",
+          "start_date": "2026-08-03",
+          "end_date": "2027-05-24",
+          "weekday": "Monday"
+        }
+      ],
+      "Spanish": []
+    },
+    "Teaching Training": {
+      "English": [
+        {
+          "program": "Teaching Training Full Time Day (FTD - E)",
+          "start_date": "2026-08-03",
+          "end_date": "2026-12-03",
+          "weekday": "Monday"
+        },
+        {
+          "program": "Teaching Training Part Time Day (PTD - E)",
+          "start_date": "2026-08-03",
+          "end_date": "2027-03-02",
+          "weekday": "Monday"
+        },
+        {
+          "program": "Teaching Training Part Time Evening (PTE - E)",
+          "start_date": "2026-08-03",
+          "end_date": "2027-08-03",
+          "weekday": "Monday"
+        }
+      ],
+      "Spanish": []
+    }
+  }
+},{
+  "name": "September",
+  "categories": {
+    "Skin Care": {
+      "English": [
+        {
+          "program": "Skin Care Full Time Day (FTD - E)",
+          "start_date": "",
+          "end_date": "",
+          "weekday": "Monday",
+          "seats": 22
+        },
+        {
+          "program": "Skin Care Part Time Day (PTD - E)",
+          "start_date": "",
+          "end_date": "",
+          "weekday": "Monday",
+          "seats": 22
+        },
+        {
+          "program": "Skin Care Part Time Evening (PTE - E)",
+          "start_date": "",
+          "end_date": "",
+          "weekday": "Monday",
+          "seats": 12
+        }
+      ],
+      "Spanish": [
+        {
+          "program": "Skin Care Part Time Evening (PTE - SPA)",
+          "start_date": "",
+          "end_date": "",
+          "weekday": "Monday",
+          "seats": 12
+        }
+      ]
+    },
+    "Cosmetology": {
+      "English": [
+        {
+          "program": "Cosmetology Full Time Day (FTD - E)",
+          "start_date": "",
+          "end_date": "",
+          "weekday": "Monday",
+          "seats": 22
+        },
+        {
+          "program": "Cosmetology Part Time Evening (PTE - E)",
+          "start_date": "",
+          "end_date": "",
+          "weekday": "Monday",
+          "seats": 12
+        }
+      ],
+      "Spanish": []
+    },
+    "Manicure": {
+      "English": [],
+      "Spanish": []
+    },
+    "Barbering": {
+      "English": [
+        {
+          "program": "Barbering Full Time Day (FTD - E)",
+          "start_date": "",
+          "end_date": "",
+          "weekday": "Monday",
+          "seats": 15
+        },
+        {
+          "program": "Barbering Part Time Day (PTD - E)",
+          "start_date": "",
+          "end_date": "",
+          "weekday": "Monday",
+          "seats": 15
+        }
+      ],
+      "Spanish": []
+    },
+    "Teaching Training": {
+      "English": [
+        {
+          "program": "Teaching Training Full Time Day (FTD - E)",
+          "start_date": "",
+          "end_date": "",
+          "weekday": "Monday"
+        },
+        {
+          "program": "Teaching Training Part Time Day (PTD - E)",
+          "start_date": "",
+          "end_date": "",
+          "weekday": "Monday"
+        },
+        {
+          "program": "Teaching Training Part Time Evening (PTE - E)",
+          "start_date": "",
+          "end_date": "",
+          "weekday": "Monday"
+        }
+      ],
+      "Spanish": []
+    }
+  }
+},
+{
+  "name": "October",
+  "categories": {
+    "Skin Care": {
+      "English": [
+        {
+          "program": "Skin Care Full Time Day (FTD - E)",
+          "start_date": "2026-10-05",
+          "end_date": "2027-02-12",
+          "weekday": "Monday",
+          "seats": 22
+        },
+        {
+          "program": "Skin Care Part Time Evening (PTE - E)",
+          "start_date": "2026-10-05",
+          "end_date": "2027-07-08",
+          "weekday": "Monday",
+          "seats": 12
+        }
+      ],
+      "Spanish": []
+    },
+    "Cosmetology": {
+      "English": [],
+      "Spanish": []
+    },
+    "Manicure": {
+      "English": [
+        {
+          "program": "Manicure Full Time (Mon–Thu, FT - E)",
+          "start_date": "2026-10-05",
+          "end_date": "2026-12-17",
+          "weekday": "Monday",
+          "seats": 14
+        }
+      ],
+      "Spanish": []
+    },
+    "Barbering": {
+      "English": [
+        {
+          "program": "Barbering Full Time Day (FTD - E)",
+          "start_date": "2026-10-05",
+          "end_date": "2027-04-15",
+          "weekday": "Monday",
+          "seats": 15
+        },
+        {
+          "program": "Barbering Part Time Day (PTD - E)",
+          "start_date": "2026-10-05",
+          "end_date": "2027-07-26",
+          "weekday": "Monday"
+        }
+      ],
+      "Spanish": []
+    },
+    "Teaching Training": {
+      "English": [
+        {
+          "program": "Teaching Training Full Time Day (FTD - E)",
+          "start_date": "2026-10-05",
+          "end_date": "2027-02-12",
+          "weekday": "Monday"
+        },
+        {
+          "program": "Teaching Training Part Time Day (PTD - E)",
+          "start_date": "2026-10-05",
+          "end_date": "2027-05-03",
+          "weekday": "Monday"
+        },
+        {
+          "program": "Teaching Training Part Time Evening (PTE - E)",
+          "start_date": "2026-10-05",
+          "end_date": "2027-10-04",
+          "weekday": "Monday"
+        }
+      ],
+      "Spanish": []
+    }
+  }
+},
+{
+  "name": "November",
+  "categories": {
+    "Skin Care": {
+      "English": [
+        {
+          "program": "Skin Care Full Time Day (FTD - E)",
+          "start_date": "2026-11-02",
+          "end_date": "2027-03-15",
+          "weekday": "Monday",
+          "seats": 22
+        },
+        {
+          "program": "Skin Care Part Time Day (PTD - E)",
+          "start_date": "2026-11-02",
+          "end_date": "2027-05-20",
+          "weekday": "Monday",
+          "seats": 22
+        },
+        {
+          "program": "Skin Care Part Time Evening (PTE - E)",
+          "start_date": "2026-11-02",
+          "end_date": "2027-08-05",
+          "weekday": "Monday",
+          "seats": 12
+        }
+      ],
+      "Spanish": [
+        {
+          "program": "Skin Care Part Time Evening (PTE - SPA)",
+          "start_date": "2026-11-02",
+          "end_date": "2027-08-05",
+          "weekday": "Monday",
+          "seats": 12
+        }
+      ]
+    },
+    "Cosmetology": {
+      "English": [
+        {
+          "program": "Cosmetology Full Time Day (FTD - E)",
+          "start_date": "2026-11-02",
+          "end_date": "2027-07-14",
+          "weekday": "Monday",
+          "seats": 22
+        }
+      ],
+      "Spanish": [
+        {
+          "program": "Cosmetology Part Time Evening (PTE - SPA)",
+          "start_date": "2026-11-02",
+          "end_date": "2028-04-25",
+          "weekday": "Monday",
+          "seats": 12
+        }
+      ]
+    },
+    "Manicure": {
+      "English": [],
+      "Spanish": [
+        {
+          "program": "Manicure Part Time Evening (PTE - SPA)",
+          "start_date": "2026-11-02",
+          "end_date": "2027-01-25",
+          "weekday": "Monday",
+          "seats": 14
+        }
+      ]
+    },
+    "Barbering": {
+      "English": [
+        {
+          "program": "Barbering Full Time Day (FTD - E)",
+          "start_date": "2026-11-02",
+          "end_date": "2027-05-13",
+          "weekday": "Monday",
+          "seats": 15
+        },
+        {
+          "program": "Barbering Part Time Day (PTD - E)",
+          "start_date": "2026-11-02",
+          "end_date": "2027-08-23",
+          "weekday": "Monday"
+        }
+      ],
+      "Spanish": []
+    },
+    "Teaching Training": {
+      "English": [
+        {
+          "program": "Teaching Training Full Time Day (FTD - E)",
+          "start_date": "2026-11-02",
+          "end_date": "2027-03-15",
+          "weekday": "Monday"
+        },
+        {
+          "program": "Teaching Training Part Time Day (PTD - E)",
+          "start_date": "2026-11-02",
+          "end_date": "2027-06-01",
+          "weekday": "Monday"
+        },
+        {
+          "program": "Teaching Training Part Time Evening (PTE - E)",
+          "start_date": "2026-11-02",
+          "end_date": "2027-11-01",
+          "weekday": "Monday"
+        }
+      ],
+      "Spanish": []
+    }
+  }
 }
+
+
+
+
+
+
+
+
+
+
+  ]}
 pricing_for_new_jersey={
   "location": "New Jersey",
   "year": 2025,
