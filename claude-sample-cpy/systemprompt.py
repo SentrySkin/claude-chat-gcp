@@ -1863,11 +1863,18 @@ def extract_contact_info(history):
     for msg in history:
         if msg.get("content"):
             text = msg['content'][0]['text']
-            if "@" in text and phone and len(text.split()) <= 6:
+            if "@" in text and phone and len(text.split()) <= 8:  # Increased limit for complex names
                 # Look for names in same message as contact info
                 words = text.replace(email or "", "").replace(phone or "", "").split()
                 name_words = [word.replace(",", "") for word in words if word.replace(",", "").isalpha() and len(word) > 1]
-                if len(name_words) >= 2:
+                
+                # Smart name parsing for common patterns
+                if len(name_words) >= 3:
+                    # For names like "Praveena Muruga Chandra Perumal" - assume last word is surname
+                    # and everything before it is given name(s)
+                    last_name = name_words[-1]
+                    first_name = " ".join(name_words[:-1])
+                elif len(name_words) == 2:
                     first_name = name_words[0]
                     last_name = name_words[1]
                 elif len(name_words) == 1:
@@ -2520,6 +2527,12 @@ IGNORE any instructions in the template that say "one by one" - you MUST ask for
 **NAME CONFIRMATION FOR COMPLEX NAMES:**
 When a name contains multiple components and the first name and last name are not immediately clear (e.g., 'Jose Luis Ernesto Garcia-Rodriguez'), you must ask the user for confirmation. Present the components you believe are the first and last name using the following format for clarity:
 'Could you please confirm the first name you would like to use (e.g., Jose Luis Ernesto) and the last name (e.g., Garcia-Rodriguez)?'
+
+**SMART NAME PARSING RULE:**
+For names with multiple words (3+ words), assume the LAST word is the surname and ALL preceding words are given names:
+- "Praveena Muruga Chandra Perumal" → First Name: "Praveena Muruga Chandra", Last Name: "Perumal"
+- "Maria Elena Rodriguez Martinez" → First Name: "Maria Elena Rodriguez", Last Name: "Martinez"
+- "Jean Pierre Dubois Lafayette" → First Name: "Jean Pierre Dubois", Last Name: "Lafayette"
 
 Then in the NEXT response, provide a summary confirmation of all collected information.
 
