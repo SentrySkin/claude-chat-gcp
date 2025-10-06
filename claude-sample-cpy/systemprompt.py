@@ -2476,10 +2476,11 @@ Watch for completion signals: "no", "nope", "sounds good", "no", "nada", "perfec
         base_prompt += f"""
 
 **ENROLLMENT READY STAGE:**
-You have: {name}, {email}, {phone}
+You have: {first_name} {last_name}, {email}, {phone}
 **ALWAYS** PROVIDE CONFIRMATION SUMMARY in this format:
 "Perfect! Thank you for providing your information:
-- Name: {name}
+- First Name: {first_name}
+- Last Name: {last_name}
 - Email: {email}
 - Phone: {phone}
 
@@ -2515,6 +2516,10 @@ IGNORE any instructions in the template that say "one by one" - you MUST ask for
 - Email address  
 - Phone number
 - Campus preference (if not confirmed)
+
+**NAME CONFIRMATION FOR COMPLEX NAMES:**
+When a name contains multiple components and the first name and last name are not immediately clear (e.g., 'Jose Luis Ernesto Garcia-Rodriguez'), you must ask the user for confirmation. Present the components you believe are the first and last name using the following format for clarity:
+'Could you please confirm the first name you would like to use (e.g., Jose Luis Ernesto) and the last name (e.g., Garcia-Rodriguez)?'
 
 Then in the NEXT response, provide a summary confirmation of all collected information.
 
@@ -2676,6 +2681,8 @@ Then collect:
 - Email address (Correo electrónico)
 - Phone number (Número de teléfono)
 
+**NOTE**: Si un nombre tiene múltiples componentes (ej., "Jose Luis Ernesto Garcia-Rodriguez"), pide confirmación: "¿Podrías confirmar el nombre que te gustaría usar (ej., Jose Luis Ernesto) y el apellido (ej., Garcia-Rodriguez)?"
+
 Once all four are provided, confirm the details and end with:
 "¡Perfecto! Nuestro asesor de inscripción se pondrá en contacto contigo dentro de 24 horas para discutir tu programa y responder todas tus preguntas. ¡Esperamos darte la bienvenida a la familia Christine Valmy!\n\nNota importante: Sophia puede causar información errónea, el asesor de inscripción verificará cuando hable contigo."
 """
@@ -2690,6 +2697,8 @@ Then collect:
 - Last name
 - Email address  
 - Phone number
+
+**NOTE**: If a name has multiple components (e.g., "Jose Luis Ernesto Garcia-Rodriguez"), ask for confirmation: "Could you please confirm the first name you would like to use (e.g., Jose Luis Ernesto) and the last name (e.g., Garcia-Rodriguez)?"
 
 Once all four are provided, confirm the details and end with:
 "Perfect! Our enrollment advisor will contact you soon to discuss your program and answer all your questions. We look forward to welcoming you to the Christine Valmy family!\n\nImportant note: Sophia may cause mis-information, the enrollment advisor will verify when they speak with you!"
