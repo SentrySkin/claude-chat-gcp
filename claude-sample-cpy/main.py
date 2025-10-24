@@ -367,6 +367,7 @@ def app(request: Request):
         data = request.get_json(silent=True) or {}
         user_id = data.get("user_id", "unknown")
         thread_id = data.get("thread_id", "unknown")
+        user_agent = data.get("user_agent", "unknown")
         history = (data.get("history") or [])[-30:]  # Limit history window for performance
 
         user_query = (data.get("query") or data.get("message") or data.get("text") or "").strip()
@@ -384,6 +385,7 @@ def app(request: Request):
                 "user_id": user_id,
                 "thread_id": thread_id,
                 "message": user_query,
+                "user_agent": user_agent,           
                 "total_latency": round(time.time() - start_total, 3)
             }, severity="INFO")
             
@@ -394,6 +396,7 @@ def app(request: Request):
                 "role": "assistant",
                 "message": completion_message,
                 "model": "ultra_fast_completion",
+                "user_agent": user_agent,  
                 "latency_sec": 0.05
             })
             
@@ -419,6 +422,7 @@ def app(request: Request):
             "thread_id": thread_id,
             "message": user_query,
             "conversation_stage": conversation_stage,
+            "user_agent": user_agent,  
             "role": "user"
         }, severity="INFO")
 
@@ -429,6 +433,7 @@ def app(request: Request):
             "role": "user",
             "message": user_query,
             "model": None,
+            "user_agent": user_agent,
             "latency_sec": None
         })
         
@@ -477,6 +482,7 @@ def app(request: Request):
             "message": answer_text,
             "role": "assistant",
             "model": MODEL,
+            "user_agent": user_agent,
             "conversation_stage": conversation_stage,
             "performance": {
                 "total_latency": total_latency,
@@ -497,6 +503,7 @@ def app(request: Request):
             "role": "assistant",
             "message": answer_text,
             "model": MODEL,
+            "user_agent": user_agent,
             "latency_sec": latency_claude
         })
 
