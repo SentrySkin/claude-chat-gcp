@@ -2475,10 +2475,11 @@ Respond with EXACTLY this message:
         base_prompt += f"""
 
 **POST-ENROLLMENT STAGE:**
-Use their name: {name}
+Use their name: {first_name} {last_name}
 Reference their program interest and campus choice.
 Watch for completion signals: "no", "nope", "sounds good", "no", "nada", "perfecto"."""
-    
+
+
     elif stage == "enrollment_ready":
         base_prompt += f"""
 
