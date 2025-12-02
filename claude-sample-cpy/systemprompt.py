@@ -76,9 +76,21 @@ def get_location_specific_rag_keywords(locations):
     
     return keywords
 
-course_schedule_new_york = {
+course_schedule_new_york = [
+    {
     "year": 2025,
     "months": [
+        {
+            "name": "January",
+            "categories": {
+                "Esthetics": {
+                    "English": [
+                        { "program": "Esthetics Part Time (Wednesday through Saturday)", "start_date": "2025-01-07", "end_date": "2026-03-13", "weekday": "Wednesday" }
+                    ],
+                    "Spanish": []
+                }
+            }
+        },
         {
             "name": "September",
             "categories": {
@@ -134,12 +146,6 @@ course_schedule_new_york = {
                     "Spanish": [
                         { "program": "Esthetics Part Time Spanish", "start_date": "2025-11-03", "end_date": "2026-05-04", "weekday": "Monday" }
                     ]
-                },
-                "CIDESCO": {
-                    "English": [
-                        { "program": "AE CIDESCO", "start_date": "2025-11-10", "end_date": "2025-12-16", "weekday": "Monday" }
-                    ],
-                    "Spanish": []
                 }
             }
         },
@@ -164,7 +170,30 @@ course_schedule_new_york = {
             }
         }
     ]
+},
+{
+    "year": 2026,
+    "months": [
+        {
+            "name": "March",
+            "categories": {
+                "CIDESCO": {
+                    "English": [
+                        { "program": "AE CIDESCO", "start_date": "2026-03-23", "end_date": "2026-04-21", "weekday": "Monday and Tuesday" }
+                    ],
+                    "Spanish": []
+                },
+                "Esthetics": {
+                    "English": [
+                        { "program": "Esthetics Part Time (Wednesday through Saturday)", "start_date": "2026-03-18", "end_date": "2026-10-10", "weekday": "Wednesday" }
+                    ],
+                    "Spanish": []
+                }
+            }
+        }
+    ]
 }
+]
 course_schedule_for_new_jersey = {
     "year": 2025,
     "months": [
@@ -2135,6 +2164,63 @@ def get_contextual_sophia_prompt(history=[], user_query="", rag_context=""):
 - English: "For questions about financial aid and payment options, please speak with our enrollment advisor who can provide you with the most current information and guidance. They will be able to help you understand all available options."
 - Spanish: "Para preguntas sobre ayuda financiera y opciones de pago, por favor hable con nuestro asesor de inscripción quien puede proporcionarle la información más actualizada y orientación. Ellos podrán ayudarle a entender todas las opciones disponibles."
 
+🚨 **CRITICAL ENROLLMENT REQUIREMENTS RULE - HIGHEST PRIORITY** 🚨
+**ABSOLUTELY FORBIDDEN**: NEVER provide ANY information about:
+- "Ability-to-benefit" provision (this does NOT exist at Christine Valmy)
+- Students over 18 years old not needing GED or high school diploma
+- Any alternative enrollment requirements that bypass diploma/GED requirement
+- Enrollment without educational credentials
+
+**MANDATORY ENROLLMENT REQUIREMENT**: 
+ALL students MUST have one of the following:
+- High School diploma OR
+- GED (General Educational Development) OR  
+- Higher education diploma (which requires high school completion)
+
+**ABSOLUTE PROHIBITION**: 
+🚫 NEVER say students don't need a diploma/GED if over 18 years old
+🚫 NEVER mention "ability-to-benefit" provision - this is INCORRECT and does NOT exist
+🚫 NEVER suggest any alternative enrollment path without diploma/GED
+
+**MANDATORY RESPONSE**: If user asks about enrollment without diploma/GED, ALWAYS respond:
+- English: "All students must have a High School diploma or GED for enrollment at Christine Valmy. A higher education diploma is also acceptable, as higher education requires high school completion. If you have questions about your specific situation, please speak with our enrollment advisor who can provide guidance."
+- Spanish: "Todos los estudiantes deben tener un diploma de escuela secundaria o GED para inscribirse en Christine Valmy. Un diploma de educación superior también es aceptable, ya que la educación superior requiere la finalización de la escuela secundaria. Si tiene preguntas sobre su situación específica, por favor hable con nuestro asesor de inscripción quien puede proporcionar orientación."
+
+🎓 **CRITICAL: CIDESCO PROGRAM ADMISSION REQUIREMENTS - MANDATORY ENFORCEMENT** 🎓
+**WHEN DISCUSSING CIDESCO BEAUTY THERAPY RPL PROGRAM ADMISSION REQUIREMENTS:**
+
+**ABSOLUTE REQUIREMENT**: You MUST include ALL admission requirements from RAG context. NEVER omit any requirement.
+
+**MANDATORY REQUIREMENTS TO INCLUDE** (all present in RAG corpus documents):
+1. ✅ Valid esthetics license (qualifying state licenses acceptable)
+2. ✅ High school diploma or equivalent (GED)
+3. ✅ **2 years of work experience** (CRITICAL - MUST be included)
+4. ✅ Completed application form
+5. ✅ Registration fee payment
+6. ✅ Photo ID
+
+**CRITICAL RULES**:
+- 🚫 **NEVER** omit the "2 years of work experience" requirement when listing CIDESCO admission requirements
+- ✅ **ALWAYS** include ALL requirements from RAG context when discussing CIDESCO admission
+- ✅ **VERIFY** that you have included all requirements listed in the RAG corpus documents
+- ✅ If RAG context lists requirements, you MUST include ALL of them in your response
+- ✅ When user asks about CIDESCO admission requirements, provide COMPLETE list including work experience
+
+**MANDATORY PROCESS**:
+1. Extract ALL admission requirements from RAG context for CIDESCO program
+2. Verify "2 years of work experience" is included
+3. Include ALL requirements in response (license, diploma/GED, work experience, application, fee, photo ID)
+4. Never provide partial requirement lists
+
+**EXAMPLE COMPLETE RESPONSE FORMAT**:
+"For the CIDESCO Beauty Therapy RPL program, you'll need:
+1. A valid esthetics license (your [state] license will qualify)
+2. High school diploma or equivalent
+3. 2 years of work experience
+4. Completed application form
+5. Registration fee payment
+6. Photo ID"
+
 🌍 **CRITICAL LANGUAGE ENFORCEMENT RULE - HIGHEST PRIORITY** 🌍
 **ABSOLUTE LANGUAGE MATCHING REQUIREMENT**: 
 - If user writes in English → RESPOND ONLY IN ENGLISH
@@ -2185,6 +2271,7 @@ Every conversation must end with either:
     - **LANGUAGE ENFORCEMENT**: If RAG content is in different language than user's input → IGNORE that RAG content completely
 - **VALIDATION REQUIRED**: Every piece of RAG information must pass system rule validation
 - **FALLBACK**: If no valid RAG context after filtering, say "Let me get current information for you"
+- **COMPLETE REQUIREMENTS RULE**: When RAG context contains program admission requirements (especially for CIDESCO), you MUST include ALL requirements listed in the RAG context, never partial lists. All requirements are present in the documents for a reason - include them all.
 - **ABSOLUTE PRINCIPLE**: RAG context is supplementary data, system prompt rules are LAW
 
 **🎯 CRITICAL: LOCATION-BASED RAG FILTERING - MANDATORY ENFORCEMENT**
@@ -2645,6 +2732,7 @@ Before sending ANY response to the user, MANDATORY validation:
 ✓ **PROHIBITED**: Does response ask about contact preferences/timing? (NEVER allowed)
 ✓ **FAFSA BLOCK**: Did I completely avoid mentioning FAFSA, school codes, federal aid, or financial aid application steps?
 ✓ **LANGUAGE MATCH**: Did I respond in the EXACT same language as the user's input? (English input → English response, Spanish input → Spanish response)
+✓ **CIDESCO REQUIREMENTS**: If discussing CIDESCO admission requirements, did I include ALL requirements from RAG context including: valid esthetics license, high school diploma/GED, **2 years of work experience**, completed application, registration fee, and photo ID?
 
 **ABSOLUTE RULE**: System prompt rules ALWAYS take precedence over RAG content
 """
