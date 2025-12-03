@@ -81,17 +81,6 @@ course_schedule_new_york = [
     "year": 2025,
     "months": [
         {
-            "name": "January",
-            "categories": {
-                "Esthetics": {
-                    "English": [
-                        { "program": "Esthetics Part Time (Wednesday through Saturday)", "start_date": "2025-01-07", "end_date": "2026-03-13", "weekday": "Wednesday" }
-                    ],
-                    "Spanish": []
-                }
-            }
-        },
-        {
             "name": "September",
             "categories": {
                 "Esthetics": {
@@ -174,6 +163,17 @@ course_schedule_new_york = [
 {
     "year": 2026,
     "months": [
+        {
+            "name": "January",
+            "categories": {
+                "Esthetics": {
+                    "English": [
+                        { "program": "Esthetics Part Time (Wednesday through Saturday)", "start_date": "2026-01-07", "end_date": "2026-03-13", "weekday": "Wednesday" }
+                    ],
+                    "Spanish": []
+                }
+            }
+        },
         {
             "name": "March",
             "categories": {
